@@ -9,19 +9,23 @@ const Header = () => {
     <header className="container flex header fixed">
 
       <div className="flex" >
-        <p>WOMEN</p>
-        <p>MEN</p>
-        <p>KIDS</p>
+        <p className='header-item flex px-16 relative'>WOMEN</p>
+        <p className='header-item flex px-16 active relative'>MEN</p>
+        <p className='header-item flex px-16 relative'>KIDS</p>
       </div>
 
       <div>
         <img src={logo} alt="logo" className="logo" />
       </div>
       <div>
-        <div>
-          <img src={dollar} alt="dollar" className="dollar-logo" />
-          <img src={vector} alt="vector" className="vector-logo" />
-          <img src={cart} alt="cart" className="cart-logo" />
+        <div className="flex">
+          <img src={dollar} alt="dollar" className="dollar-logo pr-10" />
+          <img src={vector} alt="vector" className="vector-logo pr-22" />
+
+          <span className="relative">
+            <img src={cart} alt="" className=" cart-logo" />
+            <span className="quantity-bubble">3</span>
+          </span>
         </div>
       </div>
     </header>

@@ -28,6 +28,17 @@ code {
 
 .active {
   color: #5ECE7B;
+  /* box-shadow: inset 0 -2px 0 0 #5ECE7B; */
+}
+
+.active::before {
+  position: absolute;
+  content: ' ';
+  bottom: -32px;
+  height: 2px;
+  margin: 0 auto;
+  width: 100%;
+  background: #5ECE7B;
 }
 
 .logo {
@@ -43,9 +54,47 @@ code {
 }
 
 .vector-logo {
-  width: 6px;
+  width: 12px;
 }
 
 .fixed {
   position: fixed;
+}
+
+.px-16 {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.pr-22 {
+  padding-right: 22px;
+}
+
+.relative {
+  position: relative;
+}
+
+.header-item {
+  width: 50px;
+}
+
+.grid {
+  display: grid;
+}
+
+.quantity-bubble {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  text-align: center;
+  display: block;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
 }
