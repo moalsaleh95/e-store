@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const PLP = () => {
   return (
-    <div>PLP</div>
+    <div className='container'>PLPPLPPLPPLPPLP</div>
   )
 }
 
