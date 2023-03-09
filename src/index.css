@@ -27,8 +27,7 @@ code {
 }
 
 .active {
-  color: #5ECE7B;
-  /* box-shadow: inset 0 -2px 0 0 #5ECE7B; */
+  color: #5ECE7B !important;
 }
 
 .active::before {
@@ -80,6 +79,8 @@ code {
 
 .header-item {
   max-width: 50px;
+  text-decoration: none !important;
+  color: inherit;
 }
 
 .grid {
