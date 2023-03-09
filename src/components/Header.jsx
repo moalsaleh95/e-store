@@ -3,15 +3,24 @@ import logo from "../assets/a-logo.svg";
 import dollar from "../assets/icons/dollar.svg";
 import vector from "../assets/icons/vector.svg";
 import cart from "../assets/icons/cart.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="container flex header fixed">
 
       <div className="flex" >
-        <p className='header-item flex px-16 relative'>WOMEN</p>
-        <p className='header-item flex px-16 active relative'>MEN</p>
-        <p className='header-item flex px-16 relative'>KIDS</p>
+        <Link to='/' className='header-item flex px-16 relative'>
+          WOMEN
+        </Link>
+
+        <Link to='/' className='header-item flex px-16 relative active'>
+          MEN
+        </Link>
+
+        <Link to='/' className='header-item flex px-16 relative'>
+          KIDS
+        </Link>
       </div>
 
       <div>
