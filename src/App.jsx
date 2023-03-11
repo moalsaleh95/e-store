@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path='/plp' element={<PLP />} />
+        <Route exact path='/' element={<PLP />} />
         <Route path='/pdp' element={<PDP />} />
         <Route path='/Cart' element={<Cart />} />
       </Routes>
