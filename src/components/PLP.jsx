@@ -1,7 +1,6 @@
 import React from 'react';
 import image_1 from '../assets/images/ProductB.png';
 import image_2 from '../assets/images/ProductD.png';
-import greenCart from '../assets/icons/greenCart.svg';
 
 const PLP = () => {
   const products = [
@@ -38,8 +37,8 @@ const PLP = () => {
   ]
   return (
     <div>
-      <p className='container plp-header mx-auto'>Category name</p>
-      <div className='container mx-auto flex flex-wrap justify-content-around plp-container'>
+      <p className='container plp-header'>Category name</p>
+      <div className='container flex flex-wrap justify-content-around plp-container'>
 
         {products.map(product => {
           const { name, price, image } = product

@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
+
+/* ****************************************** start of general */
 
 body {
   margin: 0;
@@ -26,6 +32,10 @@ body {
 .flex-wrap {
   flex-wrap: wrap;
 }
+
+/* ****************************************** end of general */
+
+/* ****************************************** start of PLP */
 
 .gap-56 {
   gap: 40px;
@@ -203,3 +213,145 @@ body {
   right: 31px;
   bottom: 87px;
 }
+
+/* ****************************************** end of PLP */
+
+/* ****************************************** start of PDP */
+
+.border-black {
+  border: black solid 2px;
+}
+
+.border-green {
+  border: green solid 2px;
+}
+
+.border-red {
+  border: red solid 2px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 9fr 6.5fr;
+  grid-column-gap: 90px;
+}
+
+.mt-pdp {
+  margin-top: 72.39px;
+}
+
+.pdp-title {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1D1F22;
+}
+
+.pdp-subtitle {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1D1F22;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.size-color-price {
+  font-family: 'Roboto Condensed';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  color: #1D1F22;
+  margin-top: 24px;
+}
+
+.price {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+  color: #1D1F22;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.add-to-cart-btn {
+  text-decoration: none;
+  color: white;
+  background: #5ECE7B;
+  padding: 16px 93.5px;
+
+}
+
+.add-to-cart-div {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.pdp-desc {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+  color: #1D1F22;
+}
+
+.size-boxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 63px;
+  height: 45px;
+  border: 1px solid #1D1F22;
+  margin-right: 12px;
+
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.size-boxes:hover {
+  background-color: #1D1F22;
+  color: #fff;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.color-boxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #D3D2D5;
+  margin-right: 10px;
+  border: 1px solid #D3D2D5;
+}
+
+.color-boxes:hover {
+  border: 1px solid #5ECE7B;
+}
+
+.pdp-left-container {
+  display: grid;
+  grid-template-columns: 2fr 13fr;
+  grid-column-gap: 40px;
+}
+
+.pdp-sml-photos {
+  width: 85px;
+  height: 85px;
+  margin-bottom: 32.39px;
+  cursor: pointer;
+}
+
+.pdp-big-photo {
+  width: 100%;
+}
+
+/* ****************************************** end of PDP */
