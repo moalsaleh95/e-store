@@ -6,19 +6,22 @@ import cart from "../assets/icons/cart.svg";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
+
+  const activeLink = window.location.pathname.split('/');
+  
   return (
     <header className="container relative flex justify-content-between header mx-auto">
 
       <div className="flex" >
-        <NavLink to='/' className='header-item flex justify-content-around px-16 relative'>
+        <NavLink to='/women' className={`${({isActive}) => (isActive ? "active" : "")} header-item flex justify-content-around px-16 relative`}>
           WOMEN
         </NavLink>
 
-        <NavLink to='/' className='header-item flex justify-content-around px-16 relative active'>
+        <NavLink to='/men' className={`header-item flex justify-content-around px-16 relative`}>
           MEN
         </NavLink>
 
-        <NavLink to='/' className='header-item flex justify-content-around px-16 relative'>
+        <NavLink to='/kids' className={`header-item flex justify-content-around px-16 relative`}>
           KIDS
         </NavLink>
       </div>

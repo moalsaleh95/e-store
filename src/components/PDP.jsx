@@ -3,7 +3,7 @@ import image_2 from '../assets/images/ProductD.png';
 
 const PDP = () => {
   return (
-    <div className='container mt-pdp'>
+    <div className='container mt-pdp mx-auto'>
       <div className='grid-container  mt-pdp'>
 
         <div className=' pdp-left-container'>
