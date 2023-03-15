@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@700&family=Source+Sans+Pro&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@700&display=swap') */
 
 /* ****************************************** start of general */
 
@@ -355,3 +356,20 @@ body {
 }
 
 /* ****************************************** end of PDP */
+/* ****************************************** start of CART */
+
+.cart-categoty {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: #1D1F22;
+}
+
+.divider {
+  background: #E5E5E5;
+
+}
+
+/* ****************************************** end of CART */
