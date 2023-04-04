@@ -1,12 +1,24 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_PRODUCT } from '../queries/productQueries';
 import image_2 from '../assets/images/ProductD.png';
 
-const PDP = () => {
-  return (
-    <div className='container mt-pdp mx-auto'>
-      <div className='grid-container  mt-pdp'>
 
-        <div className=' pdp-left-container'>
+const PDP = () => {
+
+  const id = 'huarache-x-stussy-le';
+  // can't pass string id directly in variables object !
+  const { loading, error, data } = useQuery(GET_PRODUCT, { variables: {id} });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error : {error.message}</p>;
+  console.log(data)
+
+  return (
+    <div className='container mt-pdp'>
+      <div className='grid-container mt-pdp'>
+
+        <div className='pdp-left-container'>
           <div>
             <img className='pdp-sml-photos' src={image_2} alt="" />
             <img className='pdp-sml-photos' src={image_2} alt="" />
