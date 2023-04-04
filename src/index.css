@@ -335,6 +335,7 @@ body {
 
 .color-boxes:hover {
   border: 1px solid #5ECE7B;
+  cursor: pointer;
 }
 
 .pdp-left-container {
