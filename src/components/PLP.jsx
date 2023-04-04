@@ -36,9 +36,9 @@ const PLP = () => {
     }
   ]
   return (
-    <div>
-      <p className='container plp-header'>Category name</p>
-      <div className='container flex flex-wrap justify-content-around plp-container'>
+    <div className='container mx-auto'>
+      <p className='plp-header'>Category name</p>
+      <div className='flex flex-wrap justify-content-around plp-container'>
 
         {products.map(product => {
           const { name, price, image } = product
