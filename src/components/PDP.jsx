@@ -1,11 +1,13 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom'
 import { GET_PRODUCT } from '../queries/productQueries';
 import image_2 from '../assets/images/ProductD.png';
 
 
 const PDP = () => {
 
+  // const { id } = useParams();
   const id = 'huarache-x-stussy-le';
   // can't pass string id directly in variables object !
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: {id} });

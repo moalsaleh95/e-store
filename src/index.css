@@ -154,12 +154,15 @@ body {
 }
 
 .plp-container {
-/*   padding-left: 101px;
-  padding-right: 101px; */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 40px;
 }
 
 .plp-img {
-  min-width: 100%;
+  object-fit: contain;
+  max-height: 310px;
+  max-width: 100%;
   padding-top: 16px;
   padding-bottom: 24px;
 }
@@ -172,6 +175,9 @@ body {
   margin-bottom: 93px;
   padding-left: 16px;
   padding-right: 16px;
+  overflow: hidden;
+  width: 386px;
+  height: 444px;
 }
 
 .plp-card:hover {
