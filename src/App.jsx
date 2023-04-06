@@ -12,22 +12,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// client
-//   .query({
-//     query: gql`
-//       query Product {
-//         product (id: "huarache-x-stussy-le") {
-//           id
-//           name
-//           brand
-//           inStock
-//           description
-//           category
-//       }
-//     }
-//   `
-//   })
-//   .then((result) => console.log(result));
 
 function App() {
 
@@ -37,8 +21,9 @@ function App() {
         <Header />
         <Routes>
           <Route exact path='/' element={<PLP />} />
-          <Route path='/pdp' element={<PDP />} />
+          <Route path='/pdp/:id' element={<PDP />} />
           <Route path='/Cart' element={<Cart />} />
+          {/* <Route path='*' element={<NotFound />} /> */}
         </Routes>
       </Router>
     </ApolloProvider>
