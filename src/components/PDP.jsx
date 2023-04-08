@@ -9,8 +9,7 @@ import { capAllLettersFunc } from '../hooks/capAllLetter';
 const PDP = () => {
 
   const { id } = useParams();
-  // const id = 'huarache-x-stussy-le';
-  // can't pass string id directly in variables object !
+  
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
   if (loading) return <p>Loading...</p>;

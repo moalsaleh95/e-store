@@ -3,7 +3,7 @@ import logo from "../assets/a-logo.svg";
 import dollar from "../assets/icons/dollar.svg";
 import vector from "../assets/icons/vector.svg";
 import cart from "../assets/icons/cart.svg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import MiniCart from '../components/MiniCart';
 import Currency from '../components/Currency';
 
@@ -16,21 +16,21 @@ const Header = () => {
       <header className="container relative flex justify-content-between header mx-auto">
 
         <div className="flex relative" >
-          <NavLink to='/women' className={`${({ isActive }) => (isActive ? "active" : "")} header-item flex justify-content-around px-16 relative`}>
-            WOMEN
+          <NavLink exact to="/all" className={` header-item flex justify-content-around px-16 relative`}>
+            ALL
           </NavLink>
 
-          <NavLink to='/men' className={`header-item flex justify-content-around px-16 relative`}>
-            MEN
+          <NavLink to='/clothes' className={`header-item flex justify-content-around px-16 relative`}>
+            CLOTHES
           </NavLink>
 
-          <NavLink to='/kids' className={`header-item flex justify-content-around px-16 relative`}>
-            KIDS
+          <NavLink to='/tech' className={`header-item flex justify-content-around px-16 relative`}>
+            TECH
           </NavLink>
         </div>
 
         <div>
-          <a href='/' ><img src={logo} alt="logo" className="logo" /></a>
+          <Link to ='/'><img src={logo} alt="logo" className="logo" /></Link>
         </div>
         <div>
           <div className="flex">
