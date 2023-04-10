@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_CATEGORIES } from '../queries/queries';
 import { capFirstLetterFunc } from '../hooks/capFirstLetter';
@@ -7,17 +7,20 @@ import { capFirstLetterFunc } from '../hooks/capFirstLetter';
 const PLP = () => {
 
   let { cat } = useParams();
-  console.log('cat:', cat)
+  console.log('cat:', cat);
+
+  let location = useLocation();
+  console.log('location', location)
 
   const { error, loading, data } = useQuery(GET_CATEGORIES)
 
   if (loading) return <p className='container'>Loading...</p>
   if (error) return (<p className='container'>Error : {error.message}</p>);
 
-  let index = cat === null ? 0
-            : cat === 'clothes' ? 1
+  let index = cat === 'clothes' ? 1
             : cat === 'tech' ? 2 
-            : 0;
+            : cat === 'all' ? 0 
+            : '';
             
   console.log('index', index)
 
@@ -45,7 +48,7 @@ const PLP = () => {
             const { id, name, gallery, prices } = product
             return (
               <>
-                <Link to={`pdp/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                <Link to={`/pdp/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                   <div key={id} className='plp-card relative'>
                     <img src={gallery[0]} alt={name} className='plp-img' />
                     <p className='plp-title'>{name}</p>

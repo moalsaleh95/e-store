@@ -9,6 +9,7 @@ import { capAllLettersFunc } from '../hooks/capAllLetter';
 const PDP = () => {
 
   const { id } = useParams();
+  console.log('idd', id)
   
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
