@@ -13,8 +13,8 @@ const PDP = () => {
   
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading) return <p className='mx-auto container'>Loading...</p>;
+  if (error) return <p className='mx-auto container'>Error : {error.message}</p>;
   console.log('data:', data.product)
 
   const product = data.product;
@@ -24,7 +24,7 @@ const PDP = () => {
 
     return (
 
-      <div className='container mt-pdp'>
+      <div className='container mx-auto mt-pdp'>
         <div className='grid-container mt-pdp'>
 
           <div className='pdp-left-container'>

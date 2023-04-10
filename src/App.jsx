@@ -20,7 +20,10 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/:cat' element={<PLP />} />
+          <Route element={<PLP />} >
+            <Route path='/' element={<PLP />} />
+            <Route path='/:cat' element={<PLP />} />
+          </Route>
           <Route path='/:cat/:id' element={<PDP />} />
           <Route path='/Cart' element={<Cart />} />
           {/* <Route path='*' element={<NotFound />} /> */}

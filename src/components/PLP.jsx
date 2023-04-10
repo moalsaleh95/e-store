@@ -17,10 +17,11 @@ const PLP = () => {
   if (loading) return <p className='container'>Loading...</p>
   if (error) return (<p className='container'>Error : {error.message}</p>);
 
-  let index = cat === 'clothes' ? 1
-            : cat === 'tech' ? 2 
-            : cat === 'all' ? 0 
-            : '';
+  let index = location === '/clothes' ? 1
+            : location === '/tech' ? 2 
+            : location === '/all' ? 0 
+            : location === '/' ? 0 
+            : 0;
             
   console.log('index', index)
 
@@ -38,7 +39,7 @@ const PLP = () => {
 
     <div className='container mx-auto'>
 
-      <p className='plp-header'>{capFirstLetterFunc(category)}</p>
+      {/* <p className='plp-header'>{ location === '/' ? "All" : capFirstLetterFunc(category)}</p> */}
 
       <div className='plp-container'>
 
