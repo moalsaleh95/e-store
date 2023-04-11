@@ -9,12 +9,12 @@ import { capAllLettersFunc } from '../hooks/capAllLetter';
 const PDP = () => {
 
   const { id } = useParams();
-  // const id = 'huarache-x-stussy-le';
-  // can't pass string id directly in variables object !
+  console.log('idd', id)
+  
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading) return <p className='mx-auto container'>Loading...</p>;
+  if (error) return <p className='mx-auto container'>Error : {error.message}</p>;
   console.log('data:', data.product)
 
   const product = data.product;
@@ -24,7 +24,7 @@ const PDP = () => {
 
     return (
 
-      <div className='container mt-pdp'>
+      <div className='container mx-auto mt-pdp'>
         <div className='grid-container mt-pdp'>
 
           <div className='pdp-left-container'>
