@@ -7,26 +7,26 @@ import { capFirstLetterFunc } from '../hooks/capFirstLetter';
 const PLP = () => {
 
   let { cat } = useParams();
-  console.log('cat:', cat);
+  // console.log('cat:', cat);
 
   let location = useLocation();
-  console.log('location', location)
+  // console.log('location', location)
 
   const { error, loading, data } = useQuery(GET_CATEGORIES)
 
-  if (loading) return <p className='container'>Loading...</p>
-  if (error) return (<p className='container'>Error : {error.message}</p>);
+  if (loading) return <p className='container mx-auto'>Loading...</p>
+  if (error) return (<p className='container mx-auto'>Error : {error.message}</p>);
 
-  let index = location === '/clothes' ? 1
-            : location === '/tech' ? 2 
-            : location === '/all' ? 0 
-            : location === '/' ? 0 
+  let index = location.pathname === '/clothes' ? 1
+            : location.pathname === '/tech' ? 2 
+            : location.pathname === '/all' ? 0 
+            : location.pathname === '/' ? 0 
             : 0;
             
-  console.log('index', index)
+  // console.log('index', index)
 
   const productsArray = (data).categories[index].products
-  console.log('data:', data)
+  // console.log('data:', data)
 
   console.log('productsArray', productsArray)
 
@@ -39,7 +39,7 @@ const PLP = () => {
 
     <div className='container mx-auto'>
 
-      {/* <p className='plp-header'>{ location === '/' ? "All" : capFirstLetterFunc(category)}</p> */}
+      <p className='plp-header'>{ location.pathname === '/' ? "All" : capFirstLetterFunc(category)}</p>
 
       <div className='plp-container'>
 
