@@ -58,24 +58,24 @@ const GET_CURRENCIES = gql `
   }
 `;
 
-// const GET_PRODUCTS_ALL = gql `
-//   query AllProducts {
-//     category {
-//       products {
-//         id
-//         name
-//         gallery
-//         prices {
-//           amount
-//           currency {
-//             symbol
-//             label
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
+const GET_PRODUCTS_ALL = gql `
+  query AllProducts {
+    category {
+      products {
+        id
+        name
+        gallery
+        prices {
+          amount
+          currency {
+            symbol
+            label
+          }
+        }
+      }
+    }
+  }
+`;
 
 // get products by their category 
 const GET_CATEGORIES = gql `
@@ -103,6 +103,6 @@ export {
   GET_PRODUCTS, 
   GET_PRODUCT, 
   GET_CURRENCIES, 
-  // GET_PRODUCTS_ALL, 
+  GET_PRODUCTS_ALL, 
   GET_CATEGORIES 
 };
