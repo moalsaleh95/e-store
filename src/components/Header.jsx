@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState }  from "react";
 import logo from "../assets/a-logo.svg";
 import dollar from "../assets/icons/dollar.svg";
 import vector from "../assets/icons/vector.svg";
+import vector_ from "../assets/icons/vector_.svg";
 import cart from "../assets/icons/cart.svg";
 import { Link, NavLink } from "react-router-dom";
 import MiniCart from '../components/MiniCart';
@@ -10,6 +11,18 @@ import Currency from '../components/Currency';
 const Header = () => {
 
   const activeLink = window.location.pathname.split('/');
+
+  const[isopen, setIsOpen]= useState(false);
+
+  function handleClick() {
+    setIsOpen((preVal)=> !preVal);
+  }
+
+  function handleClickOutside() {
+    isopen && setIsOpen(false)
+  }
+  
+  document.addEventListener('mousedown', handleClickOutside)
 
   return (
     <div className="header-container">
@@ -34,9 +47,9 @@ const Header = () => {
         </div>
         <div>
           <div className="flex">
-            <div className="">
+            <div className="dollar-vector" onClick={()=>handleClick()}>
               <img src={dollar} alt="dollar" className="dollar-logo pr-10" />
-              <img src={vector} alt="vector" className="vector-logo pr-22" />
+              <img src={vector_} alt="vector" className="vector-logo" style={isopen ? {transform:'rotate(0deg)'} : {transform:'rotate(180deg)'}} />
             </div>
 
             <span className="relative">
@@ -46,7 +59,7 @@ const Header = () => {
           </div>
         </div>
         
-        {/* <Currency /> */}
+        <Currency isopen={isopen} />
 
         {/* <MiniCart />   */}
 
