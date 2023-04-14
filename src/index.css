@@ -76,7 +76,12 @@ body {
 }
 
 .vector-logo {
+  transform: translateY(-20px);
   width: 12px;
+  cursor: pointer;
+  margin-right: 22px;
+}
+.dollar-vector {
   cursor: pointer;
 }
 
@@ -742,8 +747,8 @@ body {
   z-index: 10;
   background-color: white;
   right: 0;
-  top: 80px;
-  right: 72px;
+  top: 70px;
+  right: 115px;
   padding-top: 20px;
   padding-bottom: 20px;
   width: 114px;
