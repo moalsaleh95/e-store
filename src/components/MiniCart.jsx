@@ -2,9 +2,12 @@ import React from 'react';
 import image_2 from '../assets/images/ProductD.png';
 import arrow from '../assets/icons/arrow.svg';
 
-const MiniCart = () => {
+const MiniCart = (props) => {
+
+  const {isopen} = props
+
   return (
-    <div className='mini-cart-container absolute border-black'>
+    <div className='mini-cart-container absolute border-black' style={ isopen ? {display: 'block'} : {display: 'none'}}>
       <div className='mx-auto'>
         <span className='minicart-categoty'><b>My Bag, </b>3 items</span>
 

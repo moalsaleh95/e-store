@@ -7,7 +7,7 @@ const Currency = (props) => {
   const {isopen} = props;
   const { error, loading, data } = useQuery(GET_CURRENCIES);
 
-  console.log('isopen', isopen);
+  // console.log('isopen', isopen);
 
   if (error) return <p>Error</p>
   if (loading) return <p>Loading</p>
