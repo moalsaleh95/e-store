@@ -19,6 +19,12 @@ const PDP = () => {
 
   const product = data.product;
 
+  console.log('viewing', product)
+
+  const dispatchProduct = () => {
+    dispatchProduct(product);
+  }
+
   {
     const { id, name, brand, inStock, description, prices, gallery, attributes } = product
 
