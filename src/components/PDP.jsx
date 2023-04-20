@@ -5,12 +5,15 @@ import { GET_PRODUCT } from '../queries/queries';
 import image_2 from '../assets/images/ProductD.png';
 import { capAllLettersFunc } from '../hooks/capAllLetter';
 
+import { useDispatch } from 'react-redux';
 
 const PDP = () => {
 
   const { id } = useParams();
+  const dispatch = useDispatch();
+
   console.log('idd', id)
-  
+
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
   if (loading) return <p className='mx-auto container'>Loading...</p>;
@@ -78,7 +81,11 @@ const PDP = () => {
                 <p className='price'>{prices[0].currency.symbol}{prices[0].amount}</p>
               </div>
               <div className='add-to-cart-div'>
-                <a className='add-to-cart-btn' href='/' style={!inStock ? {pointerEvents: 'none', background: 'grey'} : {background: '#5ECE7B'}} >
+                <a
+                  className='add-to-cart-btn'
+                  onClick={()=> dispatch()}
+                  href='*'
+                  style={!inStock ? { pointerEvents: 'none', background: 'grey' } : { background: '#5ECE7B' }} >
                   {inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
                 </a>
               </div>
