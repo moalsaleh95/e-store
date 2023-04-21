@@ -8,19 +8,20 @@ export const productSlice = createSlice({
             reducer(state, action) {
                 state.push(action.payload)
             },
-            prepare(id, name, brand, prices, gallery, attributes, quantityAdded) {
-                return {
-                    payload: {
-                        id,
-                        name,
-                        brand,
-                        prices,
-                        gallery,
-                        attributes,
-                        quantityAdded
-                    }
-                }
-            }
+            // prepare(id, name, brand, prices, gallery, attributes, quantityAdded, selectedAttribute) {
+            //     return {
+            //         payload: {
+            //             id,
+            //             name,
+            //             brand,
+            //             prices,
+            //             gallery,
+            //             attributes,
+            //             quantityAdded,
+            //             selectedAttribute
+            //         }
+            //     }
+            // }
         },
         quantityAdded(state, action) {
             const { id } = action.payload

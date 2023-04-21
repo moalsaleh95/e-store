@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom'
 import { GET_PRODUCT } from '../queries/queries';
@@ -6,21 +6,39 @@ import image_2 from '../assets/images/ProductD.png';
 import { capAllLettersFunc } from '../hooks/capAllLetter';
 
 import { useDispatch } from 'react-redux';
+import { productsAdded } from '../features/product/productSlice';
 
 const PDP = () => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  console.log('idd', id)
+  const [selectedAttribute, setSelectedAttribute] = useState('');
+
+  // console.log('idd', id)
 
   const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
 
   if (loading) return <p className='mx-auto container'>Loading...</p>;
   if (error) return <p className='mx-auto container'>Error : {error.message}</p>;
-  console.log('data:', data.product)
+  // console.log('data:', data.product)
 
   const product = data.product;
+  const selectedProduct = { ...product }
+
+  // console.log('viewing', product)
+
+  const dispatchProduct = () => {
+    if (selectedAttribute.length > 0) {
+      selectedProduct.selectedAttribute = selectedAttribute;
+      console.log('added', selectedProduct)
+      dispatch(
+        productsAdded(productsAdded)
+      );
+    } else {
+      alert('Please Select an Attribute Before Adding To Cart');
+    }
+  }
 
   {
     const { id, name, brand, inStock, description, prices, gallery, attributes } = product
@@ -55,7 +73,12 @@ const PDP = () => {
                     {
                       attributes[0].items.map(item => {
                         return (
-                          <div key={item.id} className='color-boxes' style={{ background: `${item.value}` }}></div>
+                          <div
+                            onClick={(e) => setSelectedAttribute(`${e.target.innerHTML}`)}
+                            key={item.id}
+                            className='color-boxes'
+                            style={{ border: selectedAttribute === item.value ? '1px solid #5ECE7B' : '1px solid #D3D2D5', background: `${item.value}`, color: 'transparent' }}>{item.value}
+                          </div>
                         )
                       })
                     }
@@ -68,7 +91,12 @@ const PDP = () => {
                   &&
                   attributes[0].items.map(item => {
                     return (
-                      <div key={item.id} className='size-boxes relative'>{item.value}</div>
+                      <div
+                        key={item.id}
+                        onClick={(e) => setSelectedAttribute(`${e.target.innerHTML}`)}
+                        style={{ background: selectedAttribute === item.value ? '#1D1F22' : '', color: selectedAttribute === item.value ? '#fff' : '#000' }}
+                        className='size-boxes relative'>{item.value}
+                      </div>
                     )
                   })
                 }
@@ -81,13 +109,12 @@ const PDP = () => {
                 <p className='price'>{prices[0].currency.symbol}{prices[0].amount}</p>
               </div>
               <div className='add-to-cart-div'>
-                <a
-                  className='add-to-cart-btn'
-                  onClick={()=> dispatch()}
-                  href='*'
-                  style={!inStock ? { pointerEvents: 'none', background: 'grey' } : { background: '#5ECE7B' }} >
+                <button
+                  className='add-to-cart-btn cursor-pointer'
+                  onClick={() => dispatchProduct()}
+                  style={inStock ? { background: '#5ECE7B', border: '2px solid #5ECE7B' } : { pointerEvents: 'none', background: 'grey', border: '2px solid grey' }} >
                   {inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
-                </a>
+                </button>
               </div>
               {/* <p className='pdp-desc'> */}
               {description}
