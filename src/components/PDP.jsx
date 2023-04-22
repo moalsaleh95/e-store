@@ -1,29 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom'
-import { GET_PRODUCT } from '../queries/queries';
-import image_2 from '../assets/images/ProductD.png';
+// import { GET_PRODUCT } from '../queries/queries';
 import { capAllLettersFunc } from '../hooks/capAllLetter';
 
-import { useDispatch } from 'react-redux';
-import { productsAdded } from '../features/product/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { productsAdded } from '../features/product/cartSlice';
+import { fetchProduct } from '../features/product/pdpSlice';
 
 const PDP = () => {
-
   const { id } = useParams();
-  const dispatch = useDispatch();
-
   const [selectedAttribute, setSelectedAttribute] = useState('');
-
+  
   // console.log('idd', id)
 
-  const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
+  const dispatch = useDispatch();
 
-  if (loading) return <p className='mx-auto container'>Loading...</p>;
-  if (error) return <p className='mx-auto container'>Error : {error.message}</p>;
+  useEffect(()=> {
+    dispatch(fetchProduct(id));
+  }, [dispatch, id]);
+  
+  const data = useSelector((state) => state.pdpProduct.product);
+  // console.log('dataredux', data)
+  const isLoading = useSelector((state) => state.pdpProduct.isLoading);
+  const error = useSelector((state) => state.pdpProduct.error);
+  // console.log('errorredux', isLoading)
+  
+
+  // const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
+
+
+  if (isLoading) return <p className='mx-auto container'>Loading...</p>;
+  if (error) return <p className='mx-auto container'>Error : {error.message} + {error}</p>;
   // console.log('data:', data.product)
-
-  const product = data.product;
+  
+  const product = data;
   const selectedProduct = { ...product }
 
   // console.log('viewing', product)
@@ -34,6 +45,7 @@ const PDP = () => {
       console.log('added', selectedProduct)
       dispatch(
         productsAdded(productsAdded)
+        // productsAdded(selectedProduct) // try this if above does not work !
       );
     } else {
       alert('Please Select an Attribute Before Adding To Cart');
