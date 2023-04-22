@@ -23,6 +23,7 @@ const PDP = () => {
   if (error) return <p className='mx-auto container'>Error : {error.message}</p>;
   // console.log('data:', data.product)
 
+  // console.log('data', data)
   const product = data.product;
   const selectedProduct = { ...product }
 
