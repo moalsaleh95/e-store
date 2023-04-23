@@ -13,18 +13,24 @@ const PDP = () => {
   const [selectedAttribute, setSelectedAttribute] = useState('');
   
   // console.log('idd', id)
+  
 
   const dispatch = useDispatch();
 
-  useEffect(()=> {
-    dispatch(fetchProduct(id));
-  }, [dispatch, id]);
+  dispatch(fetchProduct(id));
+
+  // useEffect(()=> {
+  //   console.log('effect')
+  //   dispatch(fetchProduct(id));
+  // },);
   
-  const data = useSelector((state) => state.pdpProduct.product);
-  // console.log('dataredux', data)
+  const data = useSelector((state) => state.pdpProduct);
+  console.log('data',data)
+
   const isLoading = useSelector((state) => state.pdpProduct.isLoading);
+  console.log('isLoading', isLoading)
+
   const error = useSelector((state) => state.pdpProduct.error);
-  // console.log('errorredux', isLoading)
   
 
   // const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
@@ -35,21 +41,21 @@ const PDP = () => {
   // console.log('data:', data.product)
   
   const product = data;
-  const selectedProduct = { ...product }
+  // const selectedProduct = { ...product }
 
   // console.log('viewing', product)
 
   const dispatchProduct = () => {
-    if (selectedAttribute.length > 0) {
-      selectedProduct.selectedAttribute = selectedAttribute;
-      console.log('added', selectedProduct)
-      dispatch(
-        productsAdded(productsAdded)
-        // productsAdded(selectedProduct) // try this if above does not work !
-      );
-    } else {
-      alert('Please Select an Attribute Before Adding To Cart');
-    }
+    // if (selectedAttribute.length > 0) {
+    //   selectedProduct.selectedAttribute = selectedAttribute;
+    //   console.log('added', selectedProduct)
+    //   dispatch(
+    //     productsAdded(productsAdded)
+    //     // productsAdded(selectedProduct) // try this if above does not work !
+    //   );
+    // } else {
+    //   alert('Please Select an Attribute Before Adding To Cart');
+    // }
   }
 
   {
