@@ -368,6 +368,7 @@ body {
   height: 85px;
   margin-bottom: 32.39px;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .pdp-big-photo {

@@ -11,6 +11,7 @@ import { fetchProduct } from '../features/product/pdpSlice';
 const PDP = () => {
   const { id } = useParams();
   const [selectedAttribute, setSelectedAttribute] = useState('');
+  const [displayedImage, setDisplayedImage] = useState(0)
 
   // console.log('idd', id)
 
@@ -61,94 +62,98 @@ const PDP = () => {
   }
 
   console.log('product', product)
-  const { name, brand, inStock, description, prices, gallery, attributes } = product
 
-  return (
-    <>
-      {!isLoading && !error &&
-        <div className='container mx-auto mt-pdp'>
-          <div className='grid-container mt-pdp'>
+  const imageSelector = (e) => {
+    setDisplayedImage(e.target.id)
+  }
 
-            <div className='pdp-left-container'>
-              <div>
-                {gallery?.map(image => <img className='pdp-sml-photos' src={image} alt="" />)}
-              </div>
-              <div>
-                {Array.isArray(gallery) && gallery[0] && <img className='pdp-big-photo' src={gallery[0]} alt="" />}
-              </div>
-            </div>
+  if (product !== null) {
+    const { name, brand, inStock, description, prices, gallery, attributes } = product
 
-            <div className=''>
-              <p className='pdp-title'>{brand}</p>
-              <div className='pdp-subtitle'>{name}</div>
+    return (
+      <>
+        {!isLoading &&
+          <div className='container mx-auto mt-pdp'>
+            <div className='grid-container mt-pdp'>
 
-              <div>
-                {Array.isArray(attributes) && attributes[0] && <p className='size-color-price'>{capAllLettersFunc(attributes[0].name)}:</p>}
-                <div className='flex mt-20'>
-
-                  {/* For Colors Values */}
-                  {
-                    Array.isArray(attributes) && attributes[0] && attributes[0].name === 'Color'
-                    &&
-                    <div className='flex'>
-                      {
-                        attributes[0].items.map(item => {
-                          return (
-                            <div
-                              onClick={(e) => setSelectedAttribute(`${e.target.innerHTML}`)}
-                              key={item.id}
-                              className='color-boxes'
-                              style={{ border: selectedAttribute === item.value ? '1px solid #5ECE7B' : '1px solid #D3D2D5', background: `${item.value}`, color: 'transparent' }}>{item.value}
-                            </div>
-                          )
-                        })
-                      }
-                    </div>
-                  }
-
-                  {/* For Other values */}
-                  {
-                    Array.isArray(attributes) && attributes[0] && attributes[0].name !== 'Color'
-                    &&
-                    attributes[0].items.map(item => {
-                      return (
-                        <div
-                          key={item.id}
-                          onClick={(e) => setSelectedAttribute(`${e.target.innerHTML}`)}
-                          style={{ background: selectedAttribute === item.value ? '#1D1F22' : '', color: selectedAttribute === item.value ? '#fff' : '#000' }}
-                          className='size-boxes relative'>{item.value}
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-              </div>
-
-              <div>
+              <div className='pdp-left-container'>
                 <div>
-                  <p className='size-color-price'>PRICE:</p>
-                  {Array.isArray(prices) && prices[0] && <p className='price'>{prices[0].currency.symbol}{prices[0].amount}</p>}
+                  {gallery?.map((image, index) => <img className='pdp-sml-photos' onClick={imageSelector} id={index} key={index} src={image} alt="" />)}
                 </div>
-                <div className='add-to-cart-div'>
-                  <button
-                    className='add-to-cart-btn cursor-pointer'
-                    onClick={() => dispatchProduct()}
-                    style={inStock ? { background: '#5ECE7B', border: '2px solid #5ECE7B' } : { pointerEvents: 'none', background: 'grey', border: '2px solid grey' }} >
-                    {inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
-                  </button>
+                <div>
+                  {Array.isArray(gallery) && <img className='pdp-big-photo' src={gallery[displayedImage]} alt="" />}
                 </div>
-                {/* <p className='pdp-desc'> */}
-                {description}
-                {/* </p> */}
               </div>
 
+              <div className=''>
+                <p className='pdp-title'>{brand}</p>
+                <div className='pdp-subtitle'>{name}</div>
+
+                <div>
+                  {Array.isArray(attributes) && attributes[0] && <p className='size-color-price'>{capAllLettersFunc(attributes[0].name)}:</p>}
+                  <div className='flex mt-20'>
+
+                    {/* For Colors Values */}
+                    {
+                      Array.isArray(attributes) && attributes[0] && attributes[0].name === 'Color'
+                      &&
+                      <div className='flex'>
+                        {
+                          attributes[0].items.map(item => {
+                            return (
+                              <div
+                                onClick={(e) => setSelectedAttribute(`${e.target.innerHTML}`)}
+                                key={item.id}
+                                className='color-boxes'
+                                style={{ border: selectedAttribute === item.value ? '1px solid #5ECE7B' : '1px solid #D3D2D5', background: `${item.value}`, color: 'transparent' }}>{item.value}
+                              </div>
+                            )
+                          })
+                        }
+                      </div>
+                    }
+
+                    {/* For Other values */}
+                    {
+                      Array.isArray(attributes) && attributes[0] && attributes[0].name !== 'Color'
+                      &&
+                      attributes[0].items.map(item => {
+                        return (
+                          <div
+                            key={item.id}
+                            onClick={(e) => setSelectedAttribute(`${e.target.innerHTML}`)}
+                            style={{ background: selectedAttribute === item.value ? '#1D1F22' : '', color: selectedAttribute === item.value ? '#fff' : '#000' }}
+                            className='size-boxes relative'>{item.value}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <p className='size-color-price'>PRICE:</p>
+                    {Array.isArray(prices) && prices[0] && <p className='price'>{prices[0].currency.symbol}{prices[0].amount}</p>}
+                  </div>
+                  <div className='add-to-cart-div'>
+                    <button
+                      className='add-to-cart-btn cursor-pointer'
+                      onClick={() => dispatchProduct()}
+                      style={inStock ? { background: '#5ECE7B', border: '2px solid #5ECE7B' } : { pointerEvents: 'none', background: 'grey', border: '2px solid grey' }} >
+                      {inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
+                    </button>
+                  </div>
+                  <p className='pdp-desc' dangerouslySetInnerHTML={{__html: `${description}`}}></p>
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
-      }
-    </>
-
-  )
+        }
+      </>
+    )
+  }
 }
 
 

@@ -6,8 +6,6 @@ export const fetchProduct = createAsyncThunk('products/fetchProduct', async (id)
     const response = await client.query({ query: GET_PRODUCT, variables: { id } });
     console.log('response', response)
     return response;
-
-
 })
 
 export const pdpSlice = createSlice({
