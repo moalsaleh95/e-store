@@ -3,15 +3,11 @@ import { GET_PRODUCT } from '../../queries/queries';
 import { client } from "../../App";
 
 export const fetchProduct = createAsyncThunk('products/fetchProduct', async (id) => {
+    const response = await client.query({ query: GET_PRODUCT, variables: { id } });
+    console.log('response', response)
+    return response;
 
-    try {
-        const response = await client.query({ query: GET_PRODUCT, variables: { id } });
-        console.log('response', response)
-        return response;
-    } 
-    catch (error) {
-        throw new Error('Failed to fetch product')
-    }
+
 })
 
 export const pdpSlice = createSlice({
@@ -34,15 +30,17 @@ export const pdpSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchProduct.pending, (state) => {
+                console.log('pending')
                 state.isLoading = true;
                 state.error = null
             })
             .addCase(fetchProduct.fulfilled, (state, action) => {
                 state.isLoading = false;
-                console.log('action.payload', action.payload)
+                console.log('fulfilled', action.payload)
                 state.product = action.payload.data.product;
             })
             .addCase(fetchProduct.rejected, (state, action) => {
+                console.log('rejected')
                 state.isLoading = false;
                 state.error = action.error.message;
             })
