@@ -19,6 +19,10 @@ body {
   padding: 0 101px 0 101px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .flex {
   display: flex;
   align-items: center;
@@ -290,11 +294,10 @@ body {
 }
 
 .add-to-cart-btn {
-  text-decoration: none;
   color: white;
   /* background: #5ECE7B; */
   padding: 16px 93.5px;
-
+  /* border: 2px solid #5ECE7B */
 }
 
 .add-to-cart-div {
@@ -330,7 +333,7 @@ body {
 
 .size-boxes:hover {
   background-color: #1D1F22;
-  color: #fff;
+  color: #fff !important;
 }
 
 .mt-20 {
@@ -365,6 +368,7 @@ body {
   height: 85px;
   margin-bottom: 32.39px;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .pdp-big-photo {
