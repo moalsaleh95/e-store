@@ -4,6 +4,7 @@ import cartSlice from "../features/product/cartSlice";
 
 export const store = configureStore({
     reducer: {
-        pdpProduct: productReducer, cartSlice
+        pdpProduct: productReducer, cartSlice,
+        productsAdded: cartSlice
     }
 })

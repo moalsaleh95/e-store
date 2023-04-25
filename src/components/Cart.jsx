@@ -1,8 +1,13 @@
 import React from 'react';
 import image_2 from '../assets/images/ProductD.png';
 import arrow from '../assets/icons/arrow.svg';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Cart = () => {
+
+  // const ProductsInCart = useSelector((state)=> state.productsAdded);
+  // console.log('ProductsInCart', ProductsInCart)
+
   return (
     <div className='container mx-auto mt-80'>
       <span className='cart-categoty'>CART</span>

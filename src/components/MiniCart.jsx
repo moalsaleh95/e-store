@@ -7,7 +7,7 @@ const MiniCart = (props) => {
   const {isopen} = props
 
   return (
-    <div className='mini-cart-container absolute border-black' style={ isopen ? {display: 'block'} : {display: 'none'}}>
+    <div className='mini-cart-container absolute border-black ' style={ isopen ? {display: 'block'} : {display: 'none'}}>
       <div className='mx-auto'>
         <span className='minicart-categoty'><b>My Bag, </b>3 items</span>
 

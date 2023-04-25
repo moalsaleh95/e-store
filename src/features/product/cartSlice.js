@@ -6,7 +6,9 @@ export const cartSlice = createSlice({
     reducers: {
         productAdded: {
             reducer(state, action) {
-                state.push(action.payload)
+                console.log('payload', action.payload)
+                console.log('state', state)
+                return { ...state, ...action.payload}
             },
             // prepare(id, name, brand, prices, gallery, attributes, quantityAdded, selectedAttribute) {
             //     return {
