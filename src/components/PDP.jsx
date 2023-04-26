@@ -5,22 +5,23 @@ import { useParams } from 'react-router-dom'
 import { capAllLettersFunc } from '../hooks/capAllLetter';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { productsAdded } from '../features/product/cartSlice';
+// import { productsAdded } from '../features/product/cartSlice';
 import { productAdded } from '../features/product/cartSlice';
 import { fetchProduct } from '../features/product/pdpSlice';
 
 const PDP = () => {
   const { id } = useParams();
-  const [selectedAttribute, setSelectedAttribute] = useState([]);
+  const [selectedAttribute, setSelectedAttribute] = useState({});
   const [displayedImage, setDisplayedImage] = useState(0);
   const [attributesArrayLen, setAttributesArrayLen] = useState(1)
 
 
   const ProductsInCart = useSelector((state) => state.productsAdded);
-  console.log('ProductsInCart', ProductsInCart)
+  // console.log('ProductsInCart', ProductsInCart)
 
   const dispatch = useDispatch();
 
+  // fetches the product:
   useEffect(() => {
     dispatch(fetchProduct(id));
   }, [dispatch, id]);
@@ -30,8 +31,17 @@ const PDP = () => {
   const error = useSelector((state) => state.pdpProduct?.error);
 
   const product = useSelector((state) => state.pdpProduct?.product);
-  // console.log('product', product)
-  // setAttributesArrayLen(product.attributes.length)
+
+  // sets how many attributes the product has:
+  useEffect(() => {
+    setAttributesArrayLen(product?.attributes.length)
+    console.log('attributesArrayLen', attributesArrayLen)
+  }, [product])
+
+  
+  useEffect(()=> {
+    console.log('selectedAttribute', selectedAttribute)
+  }, [selectedAttribute])
 
   if (isLoading) return <p className='mx-auto container'>Loading...</p>;
   if (error) return <p className='mx-auto container'>Error : {error.message} + {error}</p>;
@@ -39,7 +49,7 @@ const PDP = () => {
   const selectedProduct = { ...product }
 
   const dispatchProduct = () => {
-    if (selectedAttribute.length > attributesArrayLen - 1) {
+    if (Object.entries(selectedAttribute).length === attributesArrayLen ) {
       selectedProduct.selectedAttribute = selectedAttribute;
       console.log('added', selectedProduct)
       dispatch(productAdded(selectedProduct));
@@ -86,10 +96,10 @@ const PDP = () => {
                             {value.items.map(item => {
                               return (
                                 <div
-                                  onClick={(e) => setSelectedAttribute(`${e.target.innerHTML}`)}
+                                  onClick={(e) => setSelectedAttribute({ ...selectedAttribute, [value.name]: `${e.target.innerHTML}` })}
                                   key={item.id}
                                   className='color-boxes'
-                                  style={{ border: selectedAttribute === item.value ? '1px solid #5ECE7B' : '1px solid #D3D2D5', background: `${item.value}`, color: 'transparent' }}>{item.value}
+                                  style={{ border: Object.values(selectedAttribute).includes(item.value) ? '1px solid #5ECE7B' : '1px solid #D3D2D5', background: `${item.value}`, color: 'transparent' }}>{item.value}
                                 </div>
                               )
                             })
@@ -102,14 +112,14 @@ const PDP = () => {
                       {/* For Other attribute */ }
                       return (
                         <>
-                          <p className='size-color-price'>{capAllLettersFunc(attributes[0].name)}:</p>
+                          <p className='size-color-price'>{capAllLettersFunc(value.name)}:</p>
                           <div className='flex mt-20'>
                             {value.items.map(item => {
                               return (
                                 <div
                                   key={item.id}
-                                  onClick={(e) => setSelectedAttribute(current => [...current, `${e.target.innerHTML}`])}
-                                  style={{ background: selectedAttribute === item.value ? '#1D1F22' : '', color: selectedAttribute === item.value ? '#fff' : '#000' }}
+                                  onClick={(e) => setSelectedAttribute({ ...selectedAttribute, [value.name]: `${e.target.innerHTML}` })}
+                                  style={{ background: Object.values(selectedAttribute).includes(item.value) ? '#1D1F22' : '', color: Object.values(selectedAttribute).includes(item.value) ? '#fff' : '#000' }}
                                   className='size-boxes relative'>{item.value}
                                 </div>
                               )

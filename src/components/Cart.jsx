@@ -7,6 +7,10 @@ const Cart = () => {
 
   // const ProductsInCart = useSelector((state)=> state.productsAdded);
   // console.log('ProductsInCart', ProductsInCart)
+  const ProductsInCart = useSelector((state) => state.productsAdded);
+  console.log('ProductsInCart', ProductsInCart)
+
+  const {name, price, id, brand, selectedAttributes} = ProductsInCart
 
   return (
     <div className='container mx-auto mt-80'>
