@@ -17,7 +17,7 @@ const PDP = () => {
 
 
   const ProductsInCart = useSelector((state) => state.productsAdded);
-  // console.log('ProductsInCart', ProductsInCart)
+  console.log('ProductsInCart', ProductsInCart)
 
   const dispatch = useDispatch();
 
@@ -38,8 +38,8 @@ const PDP = () => {
     console.log('attributesArrayLen', attributesArrayLen)
   }, [product])
 
-  
-  useEffect(()=> {
+
+  useEffect(() => {
     console.log('selectedAttribute', selectedAttribute)
   }, [selectedAttribute])
 
@@ -49,10 +49,12 @@ const PDP = () => {
   const selectedProduct = { ...product }
 
   const dispatchProduct = () => {
-    if (Object.entries(selectedAttribute).length === attributesArrayLen ) {
+    if (Object.entries(selectedAttribute).length === attributesArrayLen) {
       selectedProduct.selectedAttribute = selectedAttribute;
+      selectedProduct.quantity = 1;
       console.log('added', selectedProduct)
       dispatch(productAdded(selectedProduct));
+      setSelectedAttribute({})
     } else {
       alert('Please Select a Variation Before Adding To Cart');
     }

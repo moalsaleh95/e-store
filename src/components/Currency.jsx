@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENCIES } from '../queries/queries';
 
-const Currency = (props) => {
+const Currency = forwardRef((props, ref) => {
 
   const {isopen} = props;
   const { error, loading, data } = useQuery(GET_CURRENCIES);
@@ -14,11 +14,11 @@ const Currency = (props) => {
 
 
   return (
-    <div className='currency-container' style={ isopen ? {display: 'block'} : {display: 'none'}}>
+    <div className='currency-container' ref={ref} style={ isopen ? {display: 'block'} : {display: 'none'}}>
 
       {data?.currencies.map((currency) => {
         return (
-          <div className='currency-option'>
+          <div key={currency.symbol} className='currency-option'>
             {currency.symbol} {currency.label}
           </div>
         )
@@ -26,6 +26,6 @@ const Currency = (props) => {
 
     </div>
   )
-}
+})
 
 export default Currency

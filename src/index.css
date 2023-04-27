@@ -511,7 +511,7 @@ body {
 
 .divider-1 {
   background: #E5E5E5;
-  margin-top: 32px;
+  margin-top: 50px;
 }
 
 .cart-bottom {
@@ -577,8 +577,8 @@ body {
 .minicart-container {
   display: grid;
   grid-template-columns: 6fr 7fr;
-  height: 190px;
-  margin-top: 32px;
+  height: 270px;
+  margin-top: 40px;
 }
 
 .minicart-categoty {
@@ -752,7 +752,7 @@ body {
   background-color: white;
   right: 0;
   top: 70px;
-  right: 115px;
+  right: -7px;
   padding-top: 20px;
   padding-bottom: 20px;
   width: 114px;
