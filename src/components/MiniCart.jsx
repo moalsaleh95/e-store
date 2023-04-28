@@ -1,22 +1,32 @@
 import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import image_2 from '../assets/images/ProductD.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { capAllLettersFunc } from '../hooks/capAllLetter';
+import { increment, decrement, totalQuantity, totalCost } from '../features/product/cartSlice';
 
 const MiniCart = forwardRef((props, ref) => {
-
   const { isopen } = props
-  const ProductsInCart = useSelector((state) => state.productsAdded.products);
-  // console.log('ProductsInCart', ProductsInCart)
 
+  const dispatch = useDispatch()
+  const ProductsInCart = useSelector((state) => state.productsAdded);
+  const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex;
+  const totalCartCost = ProductsInCart.totalPrice;
+
+  const incrementFunc = (e) => {
+    dispatch(increment(e?.target?.id))
+  }
+
+  const decrementFunc = (e) => {
+    dispatch(decrement(e?.target?.id))
+  }
   return (
     <>
       <div className='mini-cart-container absolute border-black' ref={ref} style={isopen ? { display: 'block' } : { display: 'none' }}>
         <div className='mx-auto'>
           <span className='minicart-categoty'><b>My Bag, </b>3 items</span>
           {
-            ProductsInCart.map(item => {
+            ProductsInCart.products.map(item => {
               const { id, brand, name, prices, gallery, quantity, selectedAttribute, attributes } = item;
               const selectedAttributesArray = Object.values(selectedAttribute)
 
@@ -25,24 +35,10 @@ const MiniCart = forwardRef((props, ref) => {
                   <div className='left-container-minicart'>
                     <div className='minicart-title'>{brand}</div>
                     <div className='minicart-subtitle'>{name}</div>
-                    <div className='minicart-price'>{prices[0].currency.symbol}{prices[0].amount}</div>
-                    {/* <div>
-                      <div className='minicart-size-color-price'>SIZE:</div>
-                      <div className='flex'>
-                        <div className='size-boxes-minicart relative'><b>XS</b></div>
-                        <div className='size-boxes-minicart relative'><b>S</b></div>
-                        <div className='size-boxes-minicart relative'><b>M</b></div>
-                        <div className='size-boxes-minicart relative'><b>L</b></div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className='minicart-size-color-price'>COLOR:</div>
-                      <div className='flex'>
-                        <div className='color-boxes-minicart'></div>
-                        <div className='color-boxes-minicart'></div>
-                        <div className='color-boxes-minicart'></div>
-                      </div>
-                    </div> */}
+                    {Array.isArray(prices) && prices[selectedCurrencyIndex] &&
+                      <div className='minicart-price'>
+                        {prices[0].currency.symbol}{prices[0].amount}
+                      </div>}
                     <div>
                       {Object.values(attributes).map(value => {
 
@@ -92,12 +88,12 @@ const MiniCart = forwardRef((props, ref) => {
                   </div>
                   <div className='right-container-minicart'>
                     <div className='quantity-minicart-container'>
-                      <div className='quant-box-minicart'>+</div>
+                      <button className='quant-box-minicart' onClick={(e) => incrementFunc(e)} id={id}>+</button>
                       <div className='quant-minicart'>{quantity}</div>
-                      <div className='quant-box-minicart'>-</div>
+                      <button className='quant-box-minicart' onClick={(e) => decrementFunc(e)} id={id}>-</button>
                     </div>
                     <div>
-                    {gallery?.map((image, index) => <img className='cart-img' id={index} key={index} src={image} alt="" style={{ display: index === 0 ? 'block' : 'none' }} />)}
+                      {gallery?.map((image, index) => <img className='cart-img' id={index} key={index} src={image} alt="" style={{ display: index === 0 ? 'block' : 'none' }} />)}
                     </div>
                   </div>
                 </div>
@@ -106,7 +102,7 @@ const MiniCart = forwardRef((props, ref) => {
           }
           <div className='minicart-total'>
             <span><b>Total</b></span>
-            <span><b>$200.00</b></span>
+            <span><b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost}</b></span>
           </div>
           <div className='minicart-checkout'>
             <Link to='/cart' className='viewbag'>VIEW BAG</Link>

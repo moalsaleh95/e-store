@@ -1,24 +1,42 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_CURRENCIES } from '../queries/queries';
+// import { GET_CURRENCIES } from '../queries/queries';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrency } from '../features/product/cartSlice';
+import { fetchCurrencies } from '../features/product/cartSlice';
 
 const Currency = forwardRef((props, ref) => {
-
   const {isopen} = props;
-  const { error, loading, data } = useQuery(GET_CURRENCIES);
+
+  const dispatch = useDispatch()
+
+
+  // const { error, loading, data } = useQuery(GET_CURRENCIES);
 
   // console.log('isopen', isopen);
 
-  if (error) return <p>Error</p>
-  if (loading) return <p>Loading</p>
+  // fetches the currencies:
+  useEffect(()=> {
+    dispatch(fetchCurrencies())
+  },[dispatch])
 
+  const currencies = useSelector((state) => state.productsAdded?.currencies);
+  // console.log('currencies:',currencies)
+  // if (error) return <p>Error</p>
+  // if (loading) return <p>Loading</p>
+  
+  
+  const handleCurrencyClick = (e) => {
+    const currencyIndex = currencies.findIndex(item => item.label === e.target.id)
+    dispatch(selectCurrency(currencyIndex))
+}
 
   return (
     <div className='currency-container' ref={ref} style={ isopen ? {display: 'block'} : {display: 'none'}}>
 
-      {data?.currencies.map((currency) => {
+      {currencies.map((currency) => {
         return (
-          <div key={currency.symbol} className='currency-option'>
+          <div onClick={(e) => handleCurrencyClick(e)} id={currency.label} key={currency.label} className='currency-option'>
             {currency.symbol} {currency.label}
           </div>
         )

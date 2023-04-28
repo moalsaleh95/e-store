@@ -577,7 +577,6 @@ body {
 .minicart-container {
   display: grid;
   grid-template-columns: 6fr 7fr;
-  height: 270px;
   margin-top: 40px;
 }
 

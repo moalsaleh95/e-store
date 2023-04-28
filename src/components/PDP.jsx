@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom'
-// import { GET_PRODUCT } from '../queries/queries';
 import { capAllLettersFunc } from '../hooks/capAllLetter';
-
 import { useDispatch, useSelector } from 'react-redux';
-// import { productsAdded } from '../features/product/cartSlice';
 import { productAdded } from '../features/product/cartSlice';
 import { fetchProduct } from '../features/product/pdpSlice';
+// import { useQuery } from '@apollo/client';
+// import { productsAdded } from '../features/product/cartSlice';
+// import { GET_PRODUCT } from '../queries/queries';
 
 const PDP = () => {
   const { id } = useParams();
@@ -17,7 +16,7 @@ const PDP = () => {
 
 
   const ProductsInCart = useSelector((state) => state.productsAdded);
-  console.log('ProductsInCart', ProductsInCart)
+  // console.log('ProductsInCart', ProductsInCart)
 
   const dispatch = useDispatch();
 
@@ -25,6 +24,9 @@ const PDP = () => {
   useEffect(() => {
     dispatch(fetchProduct(id));
   }, [dispatch, id]);
+
+  const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex
+  console.log('selectedCurrencyIndex:',selectedCurrencyIndex)
 
   const isLoading = useSelector((state) => state.pdpProduct?.isLoading);
 
@@ -35,13 +37,8 @@ const PDP = () => {
   // sets how many attributes the product has i.e. length:
   useEffect(() => {
     setAttributesArrayLen(product?.attributes.length)
-    console.log('attributesArrayLen', attributesArrayLen)
+    // console.log('attributesArrayLen', attributesArrayLen)
   }, [product])
-
-
-  // useEffect(() => {
-  //   console.log('selectedAttribute', selectedAttribute)
-  // }, [selectedAttribute])
 
   if (isLoading) return <p className='mx-auto container'>Loading...</p>;
   if (error) return <p className='mx-auto container'>Error : {error.message} + {error}</p>;
@@ -52,6 +49,7 @@ const PDP = () => {
     return str.replace(/"/g, '');
   }
 
+  // dispatch selected product with its attributes:
   const dispatchProduct = () => {
     if (Object.entries(selectedAttribute).length === attributesArrayLen) {
       selectedProduct.selectedAttribute = selectedAttribute;
@@ -60,7 +58,7 @@ const PDP = () => {
       selectedProduct.id = id + newActionAttribute
       // add quantity key to product - default is 1:
       selectedProduct.quantity = 1;
-      console.log('added', selectedProduct)
+      // console.log('added', selectedProduct)
       dispatch(productAdded(selectedProduct));
       setSelectedAttribute({})
     } else {
@@ -145,7 +143,7 @@ const PDP = () => {
                 <div>
                   <div>
                     <p className='size-color-price'>PRICE:</p>
-                    {Array.isArray(prices) && prices[0] && <p className='price'>{prices[0].currency.symbol}{prices[0].amount}</p>}
+                    {Array.isArray(prices) && prices[selectedCurrencyIndex] && <p className='price'>{prices[selectedCurrencyIndex].currency.symbol}{prices[selectedCurrencyIndex].amount}</p>}
                   </div>
                   <div className='add-to-cart-div'>
                     <button

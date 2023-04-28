@@ -1,5 +1,4 @@
-import React from 'react';
-import image_2 from '../assets/images/ProductD.png';
+import React, { useEffect, useState } from 'react';
 import arrow from '../assets/icons/arrow.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, decrement } from '../features/product/cartSlice';
@@ -7,16 +6,31 @@ import { capAllLettersFunc } from '../hooks/capAllLetter';
 
 const Cart = () => {
   const dispatch = useDispatch()
-  const ProductsInCart = useSelector((state) => state.productsAdded.products);
-  console.log('ProductsInCart', ProductsInCart)
+  const ProductsInCart = useSelector((state) => state.productsAdded);
+  const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex;
+  const totalCartQuantity = ProductsInCart.totalQuantity;
+  const totalCartCost = ProductsInCart.totalPrice;
+  // const [galleryIndex, setGalleryIndex] = useState(0);
+  // const [galleryLength, setGalleryLength] = useState();
+
+  // console.log('ProductsInCart', ProductsInCart)
 
   const incrementFunc = (e) => {
     dispatch(increment(e?.target?.id))
   }
 
   const decrementFunc = (e) => {
-    console.log('e.target.id',typeof e?.target?.id) 
     dispatch(decrement(e?.target?.id))
+  }
+
+
+
+  const showPrevImage = () => {
+    // setGalleryIndex( prevGalleryIndex => prevGalleryIndex > 0 ? prevGalleryIndex - 1 : 0)
+  }
+
+  const showNextImage = () => {
+    // setGalleryIndex( prevGalleryIndex => prevGalleryIndex < galleryLength ? prevGalleryIndex + 1 : prevGalleryIndex)
   }
 
   return (
@@ -26,9 +40,10 @@ const Cart = () => {
         <span className='cart-categoty'>CART</span>
         <hr className='divider'></hr>
         {
-          ProductsInCart.map(item => {
+          ProductsInCart.products.map(item => {
             const { id, brand, name, prices, gallery, quantity, selectedAttribute, attributes } = item;
             const selectedAttributesArray = Object.values(selectedAttribute)
+            // setGalleryLength(gallery.length)
 
             return (
 
@@ -37,9 +52,12 @@ const Cart = () => {
                   <div className='left-container-cart'>
                     <div className='cart-title'>{brand}</div>
                     <div className='cart-subtitle'>{name}</div>
-                    <div>
-                      <div className='cart-price'>{prices[0].currency.symbol}{prices[0].amount}</div>
-                    </div>
+                    {Array.isArray(prices) && prices[selectedCurrencyIndex] &&
+                      <div>
+                        <div className='cart-price'>
+                          {prices[selectedCurrencyIndex].currency.symbol}{prices[selectedCurrencyIndex].amount}
+                        </div>
+                      </div>}
 
                     <div>
                       {Object.values(attributes).map(value => {
@@ -100,8 +118,8 @@ const Cart = () => {
                       {gallery?.map((image, index) => <img className='cart-img' id={index} key={index} src={image} alt="" style={{ display: index === 0 ? 'block' : 'none' }} />)}
                       {/* {if there is one image onlt don't display the arrows} */}
                       <div className='arrows-container'>
-                        <div><img src={arrow} alt="" className='arrow' /></div>
-                        <div><img src={arrow} alt="" className='arrow right-arrow' /></div>
+                        <div><img onClick={showPrevImage} src={arrow} alt="" className='arrow' /></div>
+                        <div><img onClick={showNextImage} src={arrow} alt="" className='arrow right-arrow' /></div>
                       </div>
                     </div>
 
@@ -117,9 +135,9 @@ const Cart = () => {
         }
 
 
-        <div className='cart-tax cart-bottom'>Tax 21%: <b>$42.00</b></div>
-        <div className='cart-quantity cart-bottom'>Quantity: <b>3</b></div>
-        <div className='cart-total cart-bottom'>Total: <b>$200.00</b></div>
+        <div className='cart-tax cart-bottom'>Tax 21%: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost*0.21}</b></div>
+        <div className='cart-quantity cart-bottom'>Quantity: <b>{totalCartQuantity}</b></div>
+        <div className='cart-total cart-bottom'>Total: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost}</b></div>
 
         <div ><a href='/' className='cart-order'>ORDER</a></div>
       </div>
