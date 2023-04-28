@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import image_2 from '../assets/images/ProductD.png';
 import arrow from '../assets/icons/arrow.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { productAdded } from '../features/product/cartSlice';
+import { increment, decrement } from '../features/product/cartSlice';
 import { capAllLettersFunc } from '../hooks/capAllLetter';
 
 const Cart = () => {
-  // const ProductsInCart = useSelector((state)=> state.productsAdded);
-  // console.log('ProductsInCart', ProductsInCart)
+  const dispatch = useDispatch()
   const ProductsInCart = useSelector((state) => state.productsAdded.products);
   console.log('ProductsInCart', ProductsInCart)
 
+  const incrementFunc = (e) => {
+    dispatch(increment(e?.target?.id))
+  }
 
+  const decrementFunc = (e) => {
+    console.log('e.target.id',typeof e?.target?.id) 
+    dispatch(decrement(e?.target?.id))
+  }
 
   return (
 
@@ -27,7 +33,7 @@ const Cart = () => {
             return (
 
               <>
-                <div className='cart-container' key={id}>
+                <div className='cart-container' id={id} key={id}>
                   <div className='left-container-cart'>
                     <div className='cart-title'>{brand}</div>
                     <div className='cart-subtitle'>{name}</div>
@@ -60,7 +66,7 @@ const Cart = () => {
                           )
                         }
                         else {
-                          {/* For Other attribute */ }
+                          {/* For Other attributes */ }
                           return (
                             <>
                               <p className='cart-size-color-price'>{capAllLettersFunc(value.name)}:</p>
@@ -84,9 +90,9 @@ const Cart = () => {
                   </div>
                   <div className='right-container-cart'>
                     <div className='quantity-container'>
-                      <div className='quant-box'>+</div>
+                      <button className='quant-box cursor-pointer' onClick={(e) => incrementFunc(e)} id={id}>+</button>
                       <div className='quant'>{quantity}</div>
-                      <div className='quant-box'>-</div>
+                      <button className='quant-box cursor-pointer' onClick={(e) => decrementFunc(e)} id={id}>-</button>
                     </div>
                     <div className='relative mx-auto'>
                       {/* <img src={image_2} alt="" className='cart-img' /> */}

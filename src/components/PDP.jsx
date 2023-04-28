@@ -29,28 +29,36 @@ const PDP = () => {
   const isLoading = useSelector((state) => state.pdpProduct?.isLoading);
 
   const error = useSelector((state) => state.pdpProduct?.error);
-
+  // selects the fetched product
   const product = useSelector((state) => state.pdpProduct?.product);
 
-  // sets how many attributes the product has:
+  // sets how many attributes the product has i.e. length:
   useEffect(() => {
     setAttributesArrayLen(product?.attributes.length)
     console.log('attributesArrayLen', attributesArrayLen)
   }, [product])
 
 
-  useEffect(() => {
-    console.log('selectedAttribute', selectedAttribute)
-  }, [selectedAttribute])
+  // useEffect(() => {
+  //   console.log('selectedAttribute', selectedAttribute)
+  // }, [selectedAttribute])
 
   if (isLoading) return <p className='mx-auto container'>Loading...</p>;
   if (error) return <p className='mx-auto container'>Error : {error.message} + {error}</p>;
 
   const selectedProduct = { ...product }
 
+  function removeQuotes(str) {
+    return str.replace(/"/g, '');
+  }
+
   const dispatchProduct = () => {
     if (Object.entries(selectedAttribute).length === attributesArrayLen) {
       selectedProduct.selectedAttribute = selectedAttribute;
+      // change product id
+      const newActionAttribute = removeQuotes(JSON.stringify(selectedProduct.selectedAttribute).split(' ').sort().join());
+      selectedProduct.id = id + newActionAttribute
+      // add quantity key to product - default is 1:
       selectedProduct.quantity = 1;
       console.log('added', selectedProduct)
       dispatch(productAdded(selectedProduct));

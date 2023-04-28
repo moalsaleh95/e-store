@@ -68,7 +68,7 @@ const MiniCart = forwardRef((props, ref) => {
                           )
                         }
                         else {
-                          {/* For Other attribute */ }
+                          {/* For Other attributes */ }
                           return (
                             <>
                               <p className='minicart-size-color-price'>{capAllLettersFunc(value.name)}:</p>
@@ -93,7 +93,7 @@ const MiniCart = forwardRef((props, ref) => {
                   <div className='right-container-minicart'>
                     <div className='quantity-minicart-container'>
                       <div className='quant-box-minicart'>+</div>
-                      <div className='quant-minicart'>1</div>
+                      <div className='quant-minicart'>{quantity}</div>
                       <div className='quant-box-minicart'>-</div>
                     </div>
                     <div>
