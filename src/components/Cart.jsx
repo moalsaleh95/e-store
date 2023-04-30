@@ -23,8 +23,6 @@ const Cart = () => {
     dispatch(decrement(e?.target?.id))
   }
 
-
-
   const showPrevImage = () => {
     // setGalleryIndex( prevGalleryIndex => prevGalleryIndex > 0 ? prevGalleryIndex - 1 : 0)
   }
@@ -135,7 +133,7 @@ const Cart = () => {
         }
 
 
-        <div className='cart-tax cart-bottom'>Tax 21%: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost*0.21}</b></div>
+        <div className='cart-tax cart-bottom'>Tax 21%: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost * 0.21}</b></div>
         <div className='cart-quantity cart-bottom'>Quantity: <b>{totalCartQuantity}</b></div>
         <div className='cart-total cart-bottom'>Total: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost}</b></div>
 

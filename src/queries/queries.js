@@ -58,6 +58,7 @@ const GET_CURRENCIES = gql `
   }
 `;
 
+// not used !
 const GET_PRODUCTS_ALL = gql `
   query AllProducts {
     category {

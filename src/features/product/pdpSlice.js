@@ -16,14 +16,6 @@ export const pdpSlice = createSlice({
         error: null
     },
 
-    reducers: {
-        productClicked: {
-            reducer(state, action) {
-                state.push(action.payload.product)
-            }
-        }
-    },
-
     extraReducers: (builder) => {
         builder
             .addCase(fetchProduct.pending, (state) => {
@@ -43,6 +35,6 @@ export const pdpSlice = createSlice({
 
 export const pdpProduct = (state) => state.pdpSlice;
 
-export const { productClicked } = pdpSlice.actions;
+// export const {  } = pdpSlice.actions;
 
 export default pdpSlice.reducer;

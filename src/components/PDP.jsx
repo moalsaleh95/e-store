@@ -13,10 +13,12 @@ const PDP = () => {
   const [selectedAttribute, setSelectedAttribute] = useState({});
   const [displayedImage, setDisplayedImage] = useState(0);
   const [attributesArrayLen, setAttributesArrayLen] = useState(1)
-
-
   const ProductsInCart = useSelector((state) => state.productsAdded);
+  const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex
+
   // console.log('ProductsInCart', ProductsInCart)
+  const isLoading = useSelector((state) => state.pdpProduct?.isLoading);
+  const error = useSelector((state) => state.pdpProduct?.error);
 
   const dispatch = useDispatch();
 
@@ -25,12 +27,8 @@ const PDP = () => {
     dispatch(fetchProduct(id));
   }, [dispatch, id]);
 
-  const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex
-  console.log('selectedCurrencyIndex:',selectedCurrencyIndex)
+  // console.log('selectedCurrencyIndex:',selectedCurrencyIndex)
 
-  const isLoading = useSelector((state) => state.pdpProduct?.isLoading);
-
-  const error = useSelector((state) => state.pdpProduct?.error);
   // selects the fetched product
   const product = useSelector((state) => state.pdpProduct?.product);
 

@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
-import image_2 from '../assets/images/ProductD.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { capAllLettersFunc } from '../hooks/capAllLetter';
 import { increment, decrement, totalQuantity, totalCost } from '../features/product/cartSlice';
@@ -11,6 +10,7 @@ const MiniCart = forwardRef((props, ref) => {
   const dispatch = useDispatch()
   const ProductsInCart = useSelector((state) => state.productsAdded);
   const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex;
+  const totalCartQuantity = ProductsInCart.totalQuantity;
   const totalCartCost = ProductsInCart.totalPrice;
 
   const incrementFunc = (e) => {
@@ -24,7 +24,7 @@ const MiniCart = forwardRef((props, ref) => {
     <>
       <div className='mini-cart-container absolute border-black' ref={ref} style={isopen ? { display: 'block' } : { display: 'none' }}>
         <div className='mx-auto'>
-          <span className='minicart-categoty'><b>My Bag, </b>3 items</span>
+          <span className='minicart-categoty'><b>My Bag, </b>{totalCartQuantity} items</span>
           {
             ProductsInCart.products.map(item => {
               const { id, brand, name, prices, gallery, quantity, selectedAttribute, attributes } = item;

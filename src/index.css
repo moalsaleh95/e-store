@@ -40,16 +40,27 @@ body {
   flex-wrap: wrap;
 }
 
+.header_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  height: 80px;
+}
+
+.grid_left {
+  justify-self: left;
+}
+
+.grid_right {
+  justify-self: right;
+}
+
 /* ****************************************** end of general */
 
 /* ****************************************** start of PLP */
 
 .gap-56 {
   gap: 40px;
-}
-
-.header {
-  height: 80px;
 }
 
 .active {
@@ -85,6 +96,7 @@ body {
   cursor: pointer;
   margin-right: 22px;
 }
+
 .dollar-vector {
   cursor: pointer;
 }
@@ -565,12 +577,13 @@ body {
 
 /* ****************************************** start of MINI-CART */
 .mini-cart-container {
+  min-width: 325px;
   position: absolute;
   z-index: 10;
   background-color: white;
   right: 0;
-  top: 80px;
-  right: 72px;
+  top: 57px;
+  right: 0;
   padding: 32px 16px;
 }
 
@@ -595,12 +608,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
+  min-width: 24px;
   height: 24px;
   border: 1px solid #1D1F22;
   margin-right: 12px;
   cursor: pointer;
-
+  padding: 0 1px;
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
@@ -749,9 +762,8 @@ body {
   position: absolute;
   z-index: 10;
   background-color: white;
-  right: 0;
+  right: 102px;
   top: 70px;
-  right: -7px;
   padding-top: 20px;
   padding-bottom: 20px;
   width: 114px;
@@ -772,6 +784,16 @@ body {
 .currency-option:hover {
   background-color: #EEEEEE;
   cursor: pointer;
+}
+
+.currency_sign {
+  width: 12px;
+  height: 29px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  color: #1D1F22;
+  padding: 0 10px;
 }
 
 /* ****************************************** end of Currency */
