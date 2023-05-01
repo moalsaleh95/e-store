@@ -22,7 +22,7 @@ const MiniCart = forwardRef((props, ref) => {
   }
   return (
     <>
-      <div className='mini-cart-container absolute border-black' ref={ref} style={isopen ? { display: 'block' } : { display: 'none' }}>
+      <div className='mini-cart-container scroll absolute' ref={ref} style={isopen ? { display: 'block' } : { display: 'none' }}>
         <div className='mx-auto'>
           <span className='minicart-categoty'><b>My Bag, </b>{totalCartQuantity} items</span>
           {
@@ -73,7 +73,7 @@ const MiniCart = forwardRef((props, ref) => {
                                   return (
                                     <div
                                       key={item.id}
-                                      style={{ background: selectedAttributesArray.includes(item.value) ? '#1D1F22' : '', color: selectedAttributesArray.includes(item.value) ? '#fff' : '#000' }}
+                                      style={{ background: selectedAttribute[value.name] === item.value ? '#1D1F22' : '', color: selectedAttribute[value.name] === item.value ? '#fff' : '#000' }}
                                       className='size-boxes-minicart relative'>{item.value}
                                     </div>
                                   )
@@ -88,12 +88,12 @@ const MiniCart = forwardRef((props, ref) => {
                   </div>
                   <div className='right-container-minicart'>
                     <div className='quantity-minicart-container'>
-                      <button className='quant-box-minicart' onClick={(e) => incrementFunc(e)} id={id}>+</button>
+                      <button className='quant-box-minicart cursor-pointer' onClick={(e) => incrementFunc(e)} id={id}>+</button>
                       <div className='quant-minicart'>{quantity}</div>
-                      <button className='quant-box-minicart' onClick={(e) => decrementFunc(e)} id={id}>-</button>
+                      <button className='quant-box-minicart cursor-pointer' onClick={(e) => decrementFunc(e)} id={id}>-</button>
                     </div>
                     <div>
-                      {gallery?.map((image, index) => <img className='cart-img' id={index} key={index} src={image} alt="" style={{ display: index === 0 ? 'block' : 'none' }} />)}
+                      {gallery?.map((image, index) => <img className='minicart-img' id={index} key={index} src={image} alt="" style={{ display: index === 0 ? 'block' : 'none' }} />)}
                     </div>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ const MiniCart = forwardRef((props, ref) => {
           </div>
           <div className='minicart-checkout'>
             <Link to='/cart' className='viewbag'>VIEW BAG</Link>
-            <a href='/' className='checkout'>CHECK OUT</a>
+            <a href='#' className='checkout'>CHECK OUT</a>
           </div>
         </div>
       </div >

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import logo from "../assets/a-logo.svg";
-import dollar from "../assets/icons/dollar.svg";
 import vector_ from "../assets/icons/vector_.svg";
 import { Link, NavLink } from "react-router-dom";
 import MiniCart from '../components/MiniCart';
@@ -22,11 +22,11 @@ const Header = () => {
   const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex;
   const allFetchedProductsData = useSelector((state) => state.plpProducts.products)
 
-  
+
   function handleClickOutside(e) {
     if (isopenCurrency && currencyRef.current && !currencyRef.current.contains(e.target)) {
       setIsOpenCurrency(false)
-    } 
+    }
     if (isopenCart && cartRef.current && !cartRef.current.contains(e.target)) {
       setIsOpenCart(false)
     }
@@ -39,6 +39,10 @@ const Header = () => {
   function handleClickMiniCart() {
     setIsOpenCart(prev => !prev);
   }
+
+  useEffect(() => {
+    isopenCart ? document.body.style.overflow = 'hidden' : document.body.style.overflow = '';
+  }, [isopenCart])
 
   // closes the dropdown menu when clicking anywhere on the page
   document.addEventListener('mousedown', handleClickOutside)
@@ -66,8 +70,8 @@ const Header = () => {
   dispatch(totalCost((totalPrice).toFixed(2)))
 
   return (
-    <div className="header-container">
-      <header className="container header_container relative flex justify-content-between header mx-auto">
+    <div className="">
+      <header className="container header_container flex justify-content-between header mx-auto">
 
         <div className="flex relative grid_left" >
           <NavLink exact to="/all" className={` header-item flex justify-content-around px-16 relative`}>
@@ -89,24 +93,31 @@ const Header = () => {
 
 
         <div className="grid_right">
-          <div className="flex cursor-pointer">
-            <div className="dollar-vector" onClick={() => handleClickCurrency()}>
-              {/* <img src={dollar} alt="dollar" className="dollar-logo pr-10" /> */}
-              <span className="currency_sign">{allFetchedProductsData?.categories[0].products[0]?.prices[selectedCurrencyIndex].currency.symbol}</span>
+          <div className="flex">
+            <div className="dollar-vector cursor-pointer" onClick={handleClickCurrency}>
+              <div className="currency_sign">{allFetchedProductsData?.categories[0].products[0]?.prices[selectedCurrencyIndex].currency.symbol}</div>
               <img src={vector_} alt="vector" className="vector-logo" style={isopenCurrency ? { transform: 'rotate(0deg)' } : { transform: 'rotate(180deg)' }} />
               <Currency isopen={isopenCurrency} ref={currencyRef} />
             </div>
 
-            <div className="relative cursor-pointer" onClick={() => handleClickMiniCart()}>
+            <div className="relative cursor-pointer" onClick={handleClickMiniCart}>
               <img alt="" className="cart-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAACAklEQVR4nO3aP2sUURSH4dcmhSIKInZaW0nQQmNvJRrLdAFBAqK9hVgZYy0WgoWKvaCgXcg3MKApRKx0U4iFIIp/WRkywmEc10Ry5m6c94FpFu7cO+e3M2d374IkSZIkSZIkSZIkSZIkSdKWNfzD8R54AhwtvcC+BjCsj6/AdOlF9jmAIfAO2Fl6oX2zH3gdQpgpvaA+uh4CuFR6MX10IQRws/Ri+mg6BPCw9GL66HAI4GnpxfTRvsYnIXVsG/B5nR9VM45jJg6vChX/O7DDAGCpUADPLP6a+6Eos+S6GOa6kzzXlnEtFOVy8lx3w1zVdxAB50NRbiVX5HmYa8rqrzkVivKYPNuBbzbg30121BiP24Db7W1s0mSxAY/4MvYphJC1L2ADHuFlCOBgUgA24BEWQwAnEopvA/6LeyGAswkBTIXzV3eCGq6GAl0htwFXYathLhToNpvrALASzn9uk8//XzjZ0Q9wH4BdpS92HB3qoPg/gDOlL3Rc7Uks/FvgEXCk9EWOu4+haLtLL6aPXoQAqkeSOvagsVnidmHHTif2Aa3TDQMobwZYBr54B5QxUf9pdxUYAAv1a9ljVVtoeYZXG/fZY1VbbSli9Vr2WNUGLUV8Q/5YtfxP6NcxT/5Y1SbqQg7qd+/8Bpvwv46VJEmSJEmSJEmSJEmSJEmSJLERPwE7Y54h8NcB/wAAAABJRU5ErkJggg=="></img>
               <span className="quantity-bubble">{totalCartQuantity}</span>
-              <MiniCart isopen={isopenCart} ref={cartRef} />
             </div>
           </div>
         </div>
+        <MiniCart isopen={isopenCart} ref={cartRef} />
+
+        {/* {displat grey layer when mini-cart is open} */}
+        {
+          createPortal(
+            <div className="layer" style={isopenCart ? { visibility: 'visible' } : { visibility: 'hidden' }}></div>
+            , document.getElementById('root')
+          )
+        }
+
 
       </header>
-
     </div>
   );
 };

@@ -4,6 +4,8 @@ import { capAllLettersFunc } from '../hooks/capAllLetter';
 import { useDispatch, useSelector } from 'react-redux';
 import { productAdded } from '../features/product/cartSlice';
 import { fetchProduct } from '../features/product/pdpSlice';
+import ColorAttribute from './ColorAttribute';
+import OtherAttributes from './OtherAttributes';
 // import { useQuery } from '@apollo/client';
 // import { productsAdded } from '../features/product/cartSlice';
 // import { GET_PRODUCT } from '../queries/queries';
@@ -31,6 +33,7 @@ const PDP = () => {
 
   // selects the fetched product
   const product = useSelector((state) => state.pdpProduct?.product);
+  console.log('product:',product)
 
   // sets how many attributes the product has i.e. length:
   useEffect(() => {
@@ -68,6 +71,7 @@ const PDP = () => {
     setDisplayedImage(e.target.id)
   }
 
+
   if (product !== null) {
     const { name, brand, inStock, description, prices, gallery, attributes } = product;
 
@@ -86,8 +90,8 @@ const PDP = () => {
                 </div>
               </div>
 
-              <div className=''>
-                <p className='pdp-title'>{brand}</p>
+              <div className='pdp-right-container'>
+                <div className='pdp-title'>{brand}</div>
                 <div className='pdp-subtitle'>{name}</div>
 
                 <div>
@@ -96,43 +100,13 @@ const PDP = () => {
                     {/* For Colors attribute */ }
                     if (value.name === 'Color') {
                       return (
-                        <>
-                          <p className='size-color-price'>{capAllLettersFunc(value.name)}:</p>
-                          <div className='flex mt-20'>
-                            {value.items.map(item => {
-                              return (
-                                <div
-                                  onClick={(e) => setSelectedAttribute({ ...selectedAttribute, [value.name]: `${e.target.innerHTML}` })}
-                                  key={item.id}
-                                  className='color-boxes'
-                                  style={{ border: Object.values(selectedAttribute).includes(item.value) ? '1px solid #5ECE7B' : '1px solid #D3D2D5', background: `${item.value}`, color: 'transparent' }}>{item.value}
-                                </div>
-                              )
-                            })
-                            }
-                          </div>
-                        </>
+                        <ColorAttribute selectedAttribute={selectedAttribute} setSelectedAttribute={setSelectedAttribute} value={value} />
                       )
                     }
                     else {
                       {/* For Other attribute */ }
                       return (
-                        <>
-                          <p className='size-color-price'>{capAllLettersFunc(value.name)}:</p>
-                          <div className='flex mt-20'>
-                            {value.items.map(item => {
-                              return (
-                                <div
-                                  key={item.id}
-                                  onClick={(e) => setSelectedAttribute({ ...selectedAttribute, [value.name]: `${e.target.innerHTML}` })}
-                                  style={{ background: Object.values(selectedAttribute).includes(item.value) ? '#1D1F22' : '', color: Object.values(selectedAttribute).includes(item.value) ? '#fff' : '#000' }}
-                                  className='size-boxes relative'>{item.value}
-                                </div>
-                              )
-                            })
-                            }
-                          </div>
-                        </>
+                        <OtherAttributes selectedAttribute={selectedAttribute} setSelectedAttribute={setSelectedAttribute} value={value} />
                       )
                     }
                   })}

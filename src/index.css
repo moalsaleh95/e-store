@@ -16,7 +16,7 @@ body {
 
 .container {
   max-width: 1440px;
-  padding: 0 101px 0 101px;
+  padding: 0px 101px 0 101px;
 }
 
 .cursor-pointer {
@@ -45,6 +45,8 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
   height: 80px;
+  max-width: 1440px;
+  padding: 0px 101px 0 101px;
 }
 
 .grid_left {
@@ -53,6 +55,16 @@ body {
 
 .grid_right {
   justify-self: right;
+}
+
+.layer {
+  top: 80px;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(57, 55, 72, 0.22);
+  ;
+  z-index: 1;
 }
 
 /* ****************************************** end of general */
@@ -99,6 +111,7 @@ body {
 
 .dollar-vector {
   cursor: pointer;
+  display: flex;
 }
 
 .px-16 {
@@ -133,6 +146,8 @@ body {
 }
 
 .quantity-bubble {
+  padding: 0 1px 1px 1px;
+  ;
   position: absolute;
   top: 12px;
   right: 5px;
@@ -141,8 +156,8 @@ body {
   background-color: black;
   color: white;
   border-radius: 50%;
-  width: 16px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   font-size: 10px;
 }
 
@@ -178,6 +193,8 @@ body {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 40px;
+  justify-items: center;
+  justify-content: center;
 }
 
 .plp-img {
@@ -262,8 +279,9 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 9fr 6.5fr;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 90px;
+  justify-content: center;
 }
 
 .mt-pdp {
@@ -343,10 +361,10 @@ body {
   line-height: 18px;
 }
 
-.size-boxes:hover {
+/* .size-boxes:hover {
   background-color: #1D1F22;
   color: #fff !important;
-}
+} */
 
 .mt-20 {
   margin-top: 20px;
@@ -373,6 +391,11 @@ body {
   display: grid;
   grid-template-columns: 2fr 13fr;
   grid-column-gap: 40px;
+  justify-items: center;
+}
+
+.pdp-right-container {
+  display: grid;
 }
 
 .pdp-sml-photos {
@@ -409,6 +432,11 @@ body {
   margin-top: 80px;
 }
 
+.mb-80 {
+  margin-bottom: 80px;
+}
+
+
 .cart-container {
   display: grid;
   grid-template-columns: 14.5fr 4.5fr;
@@ -416,7 +444,7 @@ body {
 
 .left-container-cart {
   margin-top: 24px;
-  height: 288px;
+  min-height: 288px;
 }
 
 .right-container-cart {
@@ -441,6 +469,7 @@ body {
   border: 1px solid #1D1F22;
   text-align: center;
   font-size: 2.2rem;
+  background-color: #fff;
 }
 
 .quant {
@@ -456,6 +485,12 @@ body {
   margin-top: 24px;
   width: 200px;
   height: 288px;
+  object-fit: cover;
+}
+
+.minicart-img {
+  width: 121px;
+  height: 190px;
   object-fit: cover;
 }
 
@@ -577,19 +612,23 @@ body {
 
 /* ****************************************** start of MINI-CART */
 .mini-cart-container {
-  min-width: 325px;
+  max-width: 410px;
   position: absolute;
   z-index: 10;
   background-color: white;
-  right: 0;
-  top: 57px;
-  right: 0;
+  top: 80px;
+  right: 72px;
   padding: 32px 16px;
+  z-index: 2;
+
+  max-height: 30rem;
+  overflow: auto;
 }
+
 
 .minicart-container {
   display: grid;
-  grid-template-columns: 6fr 7fr;
+  grid-template-columns: 1fr 1fr;
   margin-top: 40px;
 }
 
@@ -621,10 +660,10 @@ body {
   line-height: 18px;
 }
 
-.size-boxes-minicart:hover {
+/* .size-boxes-minicart:hover {
   background-color: #1D1F22;
   color: #fff;
-}
+} */
 
 .color-boxes-minicart {
   display: flex;
@@ -648,6 +687,7 @@ body {
   border: 1px solid #1D1F22;
   text-align: center;
   font-size: 1.3rem;
+  background-color: #fff;
 }
 
 .minicart-title {
@@ -705,7 +745,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 190px;
+  min-height: 190px;
 }
 
 .minicart-img {
@@ -756,14 +796,33 @@ body {
 }
 
 /* ****************************************** end of MINI-CART */
+/* ****************************************** start of Scrollbar */
+.scroll {
+  overflow-y: scroll;
+  background-color: #fff;
+  margin: 0 0 0 0;
+}
+.scroll::-webkit-scrollbar {
+  width:7px;
+}
+.scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow:inset 0 0 6px rgb(94, 206, 123); 
+  border-radius:5px;
+}
+.scroll::-webkit-scrollbar-thumb {
+  border-radius:5px;
+  -webkit-box-shadow: inset 0 0 6px rgb(94, 206, 123); 
+}
+
+/* ****************************************** end of Scrollbar */
 /* ****************************************** start of Currency */
 
 .currency-container {
   position: absolute;
   z-index: 10;
   background-color: white;
-  right: 102px;
-  top: 70px;
+  right: 78px;
+  top: 80px;
   padding-top: 20px;
   padding-bottom: 20px;
   width: 114px;
@@ -797,3 +856,92 @@ body {
 }
 
 /* ****************************************** end of Currency */
+/* ****************************************** start of Responsiveness */
+@media screen and (max-width: 1440px) {
+  .plp-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  .plp-header {
+    margin-top: 19px;
+    margin-bottom: -30px;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .plp-container {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    column-gap: 30px;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 30px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width : 800px) {
+  .header_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px;
+  }
+
+  .grid_left {
+    padding-bottom: 50px;
+  }
+
+  .grid_right {
+    margin-bottom: 80px;
+  }
+
+  .logo {
+    width: 31.18px;
+    margin-bottom: 30px;
+  }
+  
+  .plp-card {
+    max-width: 250px;
+    margin-bottom: 0px;
+  }
+
+  .pdp-sml-photos {
+    max-width: 60px;
+  }
+
+  .currency-container {
+    right: 144px;
+    top: 80px;
+  }
+
+  .cart-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .cart-img {
+    width: 250px;
+    max-width: 500px;
+  }
+
+  .left-container-cart {
+    margin-top: 70px;
+  }
+
+  .container {
+    padding: 0px 20px 0 20px;
+  }
+}
+
+/* ****************************************** end of Responsiveness */

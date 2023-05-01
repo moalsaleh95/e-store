@@ -18,7 +18,6 @@ const PLP = () => {
   const loading = useSelector((state) => state.plpProducts.isLoading)
   const error = useSelector((state) => state.plpProducts.error)
   const selectedCurrencyIndex = useSelector((state) => state.productsAdded.selectedCurrencyIndex)
-  console.log('selectedCurrencyIndex:',selectedCurrencyIndex)
     
   useEffect(() => {
     dispatch(fetchProducts())
