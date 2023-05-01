@@ -58,6 +58,7 @@ const GET_CURRENCIES = gql `
   }
 `;
 
+// not used !
 const GET_PRODUCTS_ALL = gql `
   query AllProducts {
     category {
@@ -86,6 +87,7 @@ const GET_CATEGORIES = gql `
         id
         name
         gallery
+        inStock
         prices {
           amount
           currency {
