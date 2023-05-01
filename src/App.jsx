@@ -8,7 +8,7 @@ import PDP from '../src/components/PDP';
 import Cart from '../src/components/Cart';
 
 export const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
+  uri: 'netlify/functions/',
   cache: new InMemoryCache(),
 });
 
