@@ -87,6 +87,7 @@ const GET_CATEGORIES = gql `
         id
         name
         gallery
+        inStock
         prices {
           amount
           currency {

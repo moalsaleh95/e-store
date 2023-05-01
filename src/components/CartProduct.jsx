@@ -5,13 +5,9 @@ import arrow from '../assets/icons/arrow.svg';
 const CartProduct = (props) => {
     const { 
         item, 
-        selectedCurrencyIndex,
-        // galleryIndex,
-        // setGalleryLength, 
+        selectedCurrencyIndex, 
         incrementFunc, 
-        decrementFunc, 
-        // showNextImage, 
-        // showPrevImage 
+        decrementFunc,  
     } = props
 
     const { id, brand, name, prices, gallery, quantity, selectedAttribute, attributes } = item;
@@ -103,7 +99,7 @@ const CartProduct = (props) => {
                     <img className='cart-img' src={gallery[galleryIndex]} alt=""  />
 
                     {/* {if there is one image onlt don't display the arrows} */}
-                    <div className='arrows-container'>
+                    <div className='arrows-container' style={ galleryLength > 1 ? {visibility: 'visible'} : {visibility: 'hidden'} }>
                         <div><img onClick={showPrevImage} src={arrow} alt="" className='arrow' /></div>
                         <div><img onClick={showNextImage} src={arrow} alt="" className='arrow right-arrow' /></div>
                     </div>

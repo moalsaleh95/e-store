@@ -40,9 +40,19 @@ const Header = () => {
     setIsOpenCart(prev => !prev);
   }
 
+  function lockA() {
+    const xPos = window.scrollX;
+    const yPos = window.scrollY;
+    window.onscroll = () => window.scroll(xPos, yPos);
+  }
+
+  function unlock() { window.onscroll = "" }
+
   useEffect(() => {
-    isopenCart ? document.body.style.overflow = 'hidden' : document.body.style.overflow = '';
+    // isopenCart ? document.body.style.overflow = 'hidden' : document.body.style.overflow = '';
+    isopenCart ? lockA() : unlock();
   }, [isopenCart])
+
 
   // closes the dropdown menu when clicking anywhere on the page
   document.addEventListener('mousedown', handleClickOutside)
@@ -70,7 +80,7 @@ const Header = () => {
   dispatch(totalCost((totalPrice).toFixed(2)))
 
   return (
-    <div className="">
+    <div className="relative">
       <header className="container header_container flex justify-content-between header mx-auto">
 
         <div className="flex relative grid_left" >

@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, decrement } from '../features/product/cartSlice';
 import CartProduct from './CartProduct';
-// import arrow from '../assets/icons/arrow.svg';
-// import { capAllLettersFunc } from '../hooks/capAllLetter';
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -11,8 +9,6 @@ const Cart = () => {
   const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex;
   const totalCartQuantity = ProductsInCart.totalQuantity;
   const totalCartCost = ProductsInCart.totalPrice;
-  // const [galleryIndex, setGalleryIndex] = useState(0);
-  // const [galleryLength, setGalleryLength] = useState();
 
   console.log('ProductsInCart', ProductsInCart)
 
@@ -24,14 +20,6 @@ const Cart = () => {
     dispatch(decrement(e?.target?.id))
   }
 
-  // const showPrevImage = () => {
-  //   setGalleryIndex( prevGalleryIndex => prevGalleryIndex > 0 ? prevGalleryIndex - 1 : 0)
-  // }
-
-  // const showNextImage = () => {
-  //   setGalleryIndex( prevGalleryIndex => prevGalleryIndex < galleryLength-1 ? prevGalleryIndex + 1 : prevGalleryIndex)
-  // }
-
   return (
 
     <>
@@ -41,9 +29,6 @@ const Cart = () => {
         {
           ProductsInCart.products.map(item => {
             console.log('item:', item)
-            // const { id, brand, name, prices, gallery, quantity, selectedAttribute, attributes } = item;
-            // const selectedAttributesArray = Object.values(selectedAttribute)
-            // setGalleryLength(gallery.length)
 
             return (
               <>
@@ -52,10 +37,6 @@ const Cart = () => {
                   selectedCurrencyIndex={selectedCurrencyIndex}
                   incrementFunc={incrementFunc}
                   decrementFunc={decrementFunc}
-                  // galleryIndex={galleryIndex}
-                  // setGalleryLength={setGalleryLength}
-                  // showNextImage={showNextImage}
-                  // showPrevImage={showPrevImage}
                 />
 
                 <hr className='divider-1'></hr>

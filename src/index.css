@@ -41,6 +41,7 @@ body {
 }
 
 .header_container {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
@@ -310,7 +311,7 @@ body {
   font-size: 18px;
   line-height: 18px;
   color: #1D1F22;
-  margin-top: 24px;
+  margin-top: 43px;
 }
 
 .price {
@@ -395,7 +396,7 @@ body {
 }
 
 .pdp-right-container {
-  display: grid;
+  /* display: grid; */
 }
 
 .pdp-sml-photos {
@@ -407,7 +408,26 @@ body {
 }
 
 .pdp-big-photo {
-  width: 100%;
+  max-width: 600px;
+}
+
+.outOfStockContainer {
+  position: relative;
+  background: #FFFFFF;
+  opacity: 0.5;
+}
+
+.outOfStockLayer {
+  position: absolute;
+  z-index: 1;
+  top: 31%;
+  right: 29%;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 160%;
+  color: #8D8F9A;
 }
 
 /* ****************************************** end of PDP */
@@ -489,7 +509,7 @@ body {
 }
 
 .minicart-img {
-  width: 121px;
+  width: 145px;
   height: 190px;
   object-fit: cover;
 }
@@ -749,7 +769,7 @@ body {
 }
 
 .minicart-img {
-  width: 121px;
+  width: 145px;
   height: 190px;
   object-fit: cover;
 }
@@ -762,12 +782,14 @@ body {
 }
 
 .minicart-checkout {
+  column-gap: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .viewbag {
+  width: 140px;
   text-decoration: none;
   font-family: 'Raleway';
   font-style: normal;
@@ -782,6 +804,7 @@ body {
 }
 
 .checkout {
+  width: 140px;
   text-decoration: none;
   font-family: 'Raleway';
   font-style: normal;
@@ -870,6 +893,9 @@ body {
     margin-top: 19px;
     margin-bottom: -30px;
   }
+  .pdp-big-photo {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 1025px) {
@@ -897,20 +923,16 @@ body {
     align-items: center;
     margin-top: 120px;
   }
-
   .grid_left {
     padding-bottom: 50px;
   }
-
   .grid_right {
     margin-bottom: 80px;
   }
-
   .logo {
     width: 31.18px;
     margin-bottom: 30px;
   }
-  
   .plp-card {
     max-width: 250px;
     margin-bottom: 0px;
@@ -919,28 +941,26 @@ body {
   .pdp-sml-photos {
     max-width: 60px;
   }
-
   .currency-container {
     right: 144px;
     top: 80px;
   }
-
   .cart-container {
     display: flex;
     flex-direction: column-reverse;
   }
-
   .cart-img {
     width: 250px;
     max-width: 500px;
   }
-
   .left-container-cart {
     margin-top: 70px;
   }
-
   .container {
     padding: 0px 20px 0 20px;
+  }
+  .mini-cart-container {
+    right: unset;
   }
 }
 

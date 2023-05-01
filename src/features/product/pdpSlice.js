@@ -24,6 +24,7 @@ export const pdpSlice = createSlice({
             })
             .addCase(fetchProduct.fulfilled, (state, action) => {
                 state.isLoading = false;
+                console.log('action.payload.data.product:',action.payload.data.product)
                 state.product = action.payload.data.product;
             })
             .addCase(fetchProduct.rejected, (state, action) => {
