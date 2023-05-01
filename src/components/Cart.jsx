@@ -1,62 +1,64 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { increment, decrement } from '../features/product/cartSlice';
 import CartProduct from './CartProduct';
 
-const Cart = () => {
-  const dispatch = useDispatch()
-  const ProductsInCart = useSelector((state) => state.productsAdded);
-  const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex;
-  const totalCartQuantity = ProductsInCart.totalQuantity;
-  const totalCartCost = ProductsInCart.totalPrice;
-
-  console.log('ProductsInCart', ProductsInCart)
-
-  const incrementFunc = (e) => {
-    dispatch(increment(e?.target?.id))
+class Cart extends Component {
+  incrementFunc = (e) => {
+    this.props.dispatch(increment(e?.target?.id))
   }
 
-  const decrementFunc = (e) => {
-    dispatch(decrement(e?.target?.id))
+  decrementFunc = (e) => {
+    this.props.dispatch(decrement(e?.target?.id))
   }
 
-  return (
+  render() {
+    const { productsAdded } = this.props;
+    const selectedCurrencyIndex = productsAdded.selectedCurrencyIndex;
+    const totalCartQuantity = productsAdded.totalQuantity;
+    const totalCartCost = productsAdded.totalPrice;
 
-    <>
-      <div className='container mx-auto mt-80 mb-80'>
-        <span className='cart-categoty'>CART</span>
-        <hr className='divider'></hr>
-        {
-          ProductsInCart.products.map(item => {
-            console.log('item:', item)
+    console.log('productsAdded', productsAdded)
 
-            return (
-              <>
-                <CartProduct
-                  item={item}
-                  selectedCurrencyIndex={selectedCurrencyIndex}
-                  incrementFunc={incrementFunc}
-                  decrementFunc={decrementFunc}
-                />
+    return (
+      <>
+        <div className='container mx-auto mt-80 mb-80'>
+          <span className='cart-categoty'>CART</span>
+          <hr className='divider'></hr>
+          {
+            productsAdded.products.map(item => {
+              console.log('item:', item)
 
-                <hr className='divider-1'></hr>
-              </>
+              return (
+                <>
+                  <CartProduct
+                    item={item}
+                    selectedCurrencyIndex={selectedCurrencyIndex}
+                    incrementFunc={this.incrementFunc}
+                    decrementFunc={this.decrementFunc}
+                  />
 
-
-            )
-          })
-        }
+                  <hr className='divider-1'></hr>
+                </>
 
 
-        <div className='cart-tax cart-bottom'>Tax 21%: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{(totalCartCost * 0.21).toFixed(2)}</b></div>
-        <div className='cart-quantity cart-bottom'>Quantity: <b>{totalCartQuantity}</b></div>
-        <div className='cart-total cart-bottom'>Total: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost}</b></div>
+              )
+            })
+          }
 
-        <div><a href='#' className='cart-order'>ORDER</a></div>
-      </div>
-    </>
+          <div className='cart-tax cart-bottom'>Tax 21%: <b>{productsAdded.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{(totalCartCost * 0.21).toFixed(2)}</b></div>
+          <div className='cart-quantity cart-bottom'>Quantity: <b>{totalCartQuantity}</b></div>
+          <div className='cart-total cart-bottom'>Total: <b>{productsAdded.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost}</b></div>
 
-  )
+          <div><a href='#' className='cart-order'>ORDER</a></div>
+        </div>
+      </>
+    )
+  }
 }
 
-export default Cart
+const mapStateToProps = (state) => ({
+  productsAdded: state.productsAdded,
+})
+
+export default connect(mapStateToProps)(Cart);

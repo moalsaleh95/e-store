@@ -6,9 +6,6 @@ import { productAdded } from '../features/product/cartSlice';
 import { fetchProduct } from '../features/product/pdpSlice';
 import ColorAttribute from './ColorAttribute';
 import OtherAttributes from './OtherAttributes';
-// import { useQuery } from '@apollo/client';
-// import { productsAdded } from '../features/product/cartSlice';
-// import { GET_PRODUCT } from '../queries/queries';
 
 const PDP = () => {
   const { id } = useParams();
@@ -18,24 +15,18 @@ const PDP = () => {
   const ProductsInCart = useSelector((state) => state.productsAdded);
   const selectedCurrencyIndex = ProductsInCart.selectedCurrencyIndex
 
-  // console.log('ProductsInCart', ProductsInCart)
   const isLoading = useSelector((state) => state.pdpProduct?.isLoading);
   const error = useSelector((state) => state.pdpProduct?.error);
 
   const dispatch = useDispatch();
 
-  // fetches the product:
   useEffect(() => {
     dispatch(fetchProduct(id));
   }, [dispatch, id]);
 
-  // console.log('selectedCurrencyIndex:',selectedCurrencyIndex)
-
-  // selects the fetched product
   const product = useSelector((state) => state.pdpProduct?.product);
   console.log('product:',product)
 
-  // sets how many attributes the product has i.e. length:
   useEffect(() => {
     setAttributesArrayLen(product?.attributes.length)
     // console.log('attributesArrayLen', attributesArrayLen)
@@ -50,16 +41,12 @@ const PDP = () => {
     return str.replace(/"/g, '');
   }
 
-  // dispatch selected product with its attributes:
   const dispatchProduct = () => {
     if (Object.entries(selectedAttribute).length === attributesArrayLen) {
       selectedProduct.selectedAttribute = selectedAttribute;
-      // change product id
       const newActionAttribute = removeQuotes(JSON.stringify(selectedProduct.selectedAttribute).split(' ').sort().join());
       selectedProduct.id = id + newActionAttribute
-      // add quantity key to product - default is 1:
       selectedProduct.quantity = 1;
-      // console.log('added', selectedProduct)
       dispatch(productAdded(selectedProduct));
       setSelectedAttribute({})
     } else {
@@ -136,8 +123,4 @@ const PDP = () => {
     )
   }
 }
-
-
-
-
 export default PDP
