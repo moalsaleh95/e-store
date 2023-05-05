@@ -56,7 +56,7 @@ const PLP = () => {
                 <Link to={`/pdp/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
 
                   <div className={`${!inStock ? 'outOfStockContainer' : ''}`}>
-                    <span className='outOfStockLayer' style={!inStock ? {visibility: 'visible'} : {visibility: 'hidden'}}>OUT OF STOCK</span>
+                    <span className='outOfStockLayer' style={!inStock ? { visibility: 'visible' } : { visibility: 'hidden' }}>OUT OF STOCK</span>
                     <div key={id} className='plp-card relative'>
                       <img src={gallery[0]} alt={name} className='plp-img' />
                       <p className='plp-title'>{name}</p>
@@ -68,7 +68,6 @@ const PLP = () => {
               </>
             )
           })
-
         )
         }
       </div>
