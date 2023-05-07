@@ -8,8 +8,8 @@ class ColorAttribute extends Component {
   }
 
   handleItemClick(e) {
-    const { selectedAttribute, setSelectedAttribute, value } = this.props;
-    setSelectedAttribute({ ...selectedAttribute, [value.name]: `${e.target.innerHTML}` });
+    const { selectedAttribute, updateSetSelectedAttribute, value } = this.props;
+    updateSetSelectedAttribute({ ...selectedAttribute, [value.name]: `${e.target.innerHTML}` });
   }
 
   render() {
@@ -24,7 +24,7 @@ class ColorAttribute extends Component {
               key={item.id}
               className='color-boxes'
               style={{
-                border: Object.values(selectedAttribute).includes(item.value) ? '1px solid #5ECE7B' : '1px solid #D3D2D5',
+                // border: Object.values(selectedAttribute).includes(item.value) ? '1px solid #5ECE7B' : '1px solid #D3D2D5',
                 background: `${item.value}`,
                 color: 'transparent'
               }}
