@@ -100,13 +100,13 @@ const PDP = () => {
                     {/* For Colors attribute */ }
                     if (value.name === 'Color') {
                       return (
-                        <ColorAttribute selectedAttribute={selectedAttribute} setSelectedAttribute={setSelectedAttribute} value={value} />
+                        <ColorAttribute key={() => new Date().toJSON()} selectedAttribute={selectedAttribute} setSelectedAttribute={setSelectedAttribute} value={value} />
                       )
                     }
                     else {
                       {/* For Other attribute */ }
                       return (
-                        <OtherAttributes selectedAttribute={selectedAttribute} setSelectedAttribute={setSelectedAttribute} value={value} />
+                        <OtherAttributes key={() => new Date().toJSON()} selectedAttribute={selectedAttribute} setSelectedAttribute={setSelectedAttribute} value={value} />
                       )
                     }
                   })}

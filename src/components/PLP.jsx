@@ -53,7 +53,7 @@ const PLP = () => {
             const { id, name, gallery, prices, inStock } = product
             return (
               <>
-                <Link to={`/pdp/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                <Link key={() => new Date().toJSON()} to={`/pdp/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
 
                   <div className={`${!inStock ? 'outOfStockContainer' : ''}`}>
                     <span className='outOfStockLayer' style={!inStock ? {visibility: 'visible'} : {visibility: 'hidden'}}>OUT OF STOCK</span>

@@ -31,6 +31,8 @@ const Currency = forwardRef((props, ref) => {
     dispatch(selectCurrency(currencyIndex))
 }
 
+console.log('ref:', ref)
+
   return (
     <div className='currency-container' ref={ref} style={ isopen ? {display: 'block'} : {display: 'none'}}>
 
