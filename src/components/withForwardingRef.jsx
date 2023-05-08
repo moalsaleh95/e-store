@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 const withForwardingRef = (Component) => {
     class HOC extends React.Component {
         render () {
-            return <Component {...this.props} forwardedRef={this.props.forwardedRef} />
+            return <Component {...this.props} ref={this.props.forwardedRef} />
         }
     }
 

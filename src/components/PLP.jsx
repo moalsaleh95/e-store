@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 // import { useQuery } from '@apollo/client';
 // import { GET_CATEGORIES } from '../queries/queries';
 
-
 class PLP extends Component {
     constructor(props) {
         super(props);
@@ -28,11 +27,12 @@ class PLP extends Component {
         let { cat } = this.props.params;
         let location = this.props.location;
 
-        let index = location.pathname === '/clothes' ? 1
-            : location.pathname === '/tech' ? 2
-                : location.pathname === '/all' ? 0
-                    : location.pathname === '/' ? 0
-                        : 0;
+        let index =
+            location.pathname === '/clothes' ? 1
+                : location.pathname === '/tech' ? 2
+                    : location.pathname === '/all' ? 0
+                        : location.pathname === '/' ? 0
+                            : 0;
 
         let category = cat === '' ? 'all' : cat;
 

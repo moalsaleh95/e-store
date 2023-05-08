@@ -15,11 +15,10 @@ class Currency extends React.Component {
   };
 
   render() {
-    const { isopen, currencies, ref } = this.props;
-    console.log('ref:',this.props.ref)
+    const { isopen, currencies } = this.props;
 
     return (
-      <div className='currency-container' ref={this.props.ref} style={isopen ? { display: 'block' } : { display: 'none' }}>
+      <div className='currency-container' ref={this.props.forwardedRef} style={isopen ? { display: 'block' } : { display: 'none' }}>
         {currencies.map((currency) => {
           return (
             <div onClick={(e) => this.handleCurrencyClick(e)} id={currency.label} key={currency.label} className='currency-option'>

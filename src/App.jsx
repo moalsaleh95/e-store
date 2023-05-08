@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -12,25 +11,25 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
-function App() {
-
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <Header />
-        <Routes>
-          <Route element={<PLP />} >
-            <Route path='/' element={<PLP />} />
-            <Route path='/:cat' element={<PLP />} />
-          </Route>
-          <Route path='/:cat/:id' element={<PDP />} />
-          <Route path='/Cart' element={<Cart />} />
-          {/* <Route path='*' element={<NotFound />} /> */}
-        </Routes>
-      </Router>
-    </ApolloProvider>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <Router>
+          <Header />
+          <Routes>
+            <Route element={<PLP />} >
+              <Route path='/' element={<PLP />} />
+              <Route path='/:cat' element={<PLP />} />
+            </Route>
+            <Route path='/:cat/:id' element={<PDP />} />
+            <Route path='/Cart' element={<Cart />} />
+            {/* <Route path='*' element={<NotFound />} /> */}
+          </Routes>
+        </Router>
+      </ApolloProvider>
+    );
+  }
 }
 
 export default App;

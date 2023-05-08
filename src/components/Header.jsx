@@ -8,13 +8,12 @@ import Currency from '../components/Currency';
 import { totalQuantity, totalCost } from '../features/product/cartSlice';
 import { connect } from 'react-redux'
 import withForwardingRef from "./withForwardingRef";
-// import { useDispatch, useSelector } from "react-redux";
 
 class Header extends React.Component {
-  // const activeLink = window.location.pathname.split('/');
 
   constructor(props) {
     super(props);
+
     this.cartRef = React.createRef();
     this.currencyRef = React.createRef();
 
@@ -80,6 +79,8 @@ class Header extends React.Component {
   render() {
     const CurrencywithHOC = withForwardingRef(Currency)
     const MiniCartywithHOC = withForwardingRef(MiniCart)
+    // const CurrencywithHOC = withForwardRef(Currency)
+    // const MiniCartywithHOC = withForwardRef(MiniCart)
 
     const { isopenCurrency, isopenCart } = this.state;
     const { totalCartQuantity, ProductsInCart, allFetchedProductsData, selectedCurrencyIndex } = this.props;

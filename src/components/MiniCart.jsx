@@ -36,7 +36,7 @@ class MiniCart extends Component {
 
     return (
       <>
-        <div className='mini-cart-container scroll absolute' ref={this.props.innerRef} style={isopen ? { display: 'block' } : { display: 'none' }}>
+        <div className='mini-cart-container scroll absolute' ref={this.props.forwardedRef} style={isopen ? { display: 'block' } : { display: 'none' }}>
           <div className='mx-auto'>
             <span className='minicart-categoty'><b>My Bag, </b>{totalQuantity} items</span>
             {
@@ -62,7 +62,7 @@ class MiniCart extends Component {
 
                             return (
                               <>
-                                <p className='minicart-size-color-price'>{capAllLettersFunc(value.name)}:</p>
+                                <p className='minicart-size-color-price' key={() => new Date.now().toJSON()}>{capAllLettersFunc(value.name)}:</p>
                                 <div className='flex mt-20'>
                                   {value.items.map(item => {
                                     return (
@@ -82,7 +82,7 @@ class MiniCart extends Component {
                             {/* For Other attributes */ }
                             return (
                               <>
-                                <p className='minicart-size-color-price'>{capAllLettersFunc(value.name)}:</p>
+                                <p className='minicart-size-color-price' key={() => new Date.now().toJSON()}>{capAllLettersFunc(value.name)}:</p>
                                 <div className='flex mt-20'>
                                   {value.items.map(item => {
                                     return (
