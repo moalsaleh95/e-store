@@ -22,7 +22,6 @@ export const cartSlice = createSlice({
 
         productAdded(state, action) {
             const { id } = action.payload
-
             const existingProductIDIndex = state.products.findIndex(item => item.id === id);
 
             // increment if same id exists

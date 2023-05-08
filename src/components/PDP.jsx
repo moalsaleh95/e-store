@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { useParams } from 'react-router-dom'
-import { capAllLettersFunc } from '../hooks/capAllLetter';
-import { useDispatch, useSelector } from 'react-redux';
 import { productAdded } from '../features/product/cartSlice';
 import { fetchProduct } from '../features/product/pdpSlice';
 import ColorAttribute from './ColorAttribute';
@@ -27,10 +24,9 @@ class PDP extends Component {
   }
 
   updateSetSelectedAttribute(newState) {
-    console.log('newState:',newState)
     this.setState(prevState => {
-      return { selectedAttribute: {...prevState.selectedAttribute, ...newState }};
-    } )
+      return { selectedAttribute: { ...prevState.selectedAttribute, ...newState } };
+    })
   }
 
   componentDidMount() {
@@ -43,20 +39,28 @@ class PDP extends Component {
     if (id !== prevProps.params.id) {
       this.props.dispatch(fetchProduct(id));
     }
+
+    const { product } = this.props;
+    if (prevProps.product !== product) {
+      this.setState({
+        attributesArrayLen: product?.attributes.length || 0,
+      });
+    }
   }
+  
 
   dispatchProduct = () => {
     const { selectedAttribute, attributesArrayLen } = this.state;
-    console.log('attributesArrayLen:', attributesArrayLen)
     const { id } = this.props.params;
     const { product } = this.props;
     const newSelectedProduct = { ...product };
 
-    if (Object.entries(this.selectedAttribute).length === attributesArrayLen) {
+    if (Object.entries(selectedAttribute).length === attributesArrayLen) {
       newSelectedProduct.selectedAttribute = selectedAttribute;
       const newActionAttribute = this.removeQuotes(JSON.stringify(newSelectedProduct.selectedAttribute).split(' ').sort().join());
       newSelectedProduct.id = id + newActionAttribute
       newSelectedProduct.quantity = 1;
+      
       this.props.dispatch(productAdded(newSelectedProduct));
       this.setState({ selectedAttribute: {} });
     } else {
@@ -74,19 +78,17 @@ class PDP extends Component {
 
   setSelectedAttribute = (attribute, value) => {
     this.setState(prevState => {
-      const selectedAttribute = {...prevState.selectedAttribute};
+      const selectedAttribute = { ...prevState.selectedAttribute };
       selectedAttribute[attribute] = value;
       return { selectedAttribute };
     });
   }
-  
+
 
   render() {
     const { product, isLoading, error } = this.props;
     const { selectedCurrencyIndex } = this.props.ProductsInCart;
     const { selectedAttribute, displayedImage } = this.state;
-
-    console.log('selectedAttribute::',selectedAttribute)
 
     if (isLoading) return <p className='mx-auto container'>Loading...</p>;
     if (error) return <p className='mx-auto container'>Error : {error.message} + {error}</p>;
@@ -119,13 +121,13 @@ class PDP extends Component {
                       {/* For Colors attribute */ }
                       if (value.name === 'Color') {
                         return (
-                          <ColorAttribute selectedAttribute={this.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
+                          <ColorAttribute selectedAttribute={this.state.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
                         )
                       }
                       else {
                         {/* For Other attribute */ }
                         return (
-                          <OtherAttributes selectedAttribute={this.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
+                          <OtherAttributes selectedAttribute={this.state.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
                         )
                       }
                     })}

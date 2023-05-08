@@ -14,8 +14,6 @@ class MiniCart extends Component {
     this.state = {
       isopen: this.props.isopen,
       selectedCurrencyIndex: null,
-      totalCartQuantity: 0,
-      totalCartCost: 0,
     }
 
     this.incrementFunc = this.incrementFunc.bind(this);
@@ -30,19 +28,17 @@ class MiniCart extends Component {
     this.props.dispatch(decrement(e?.target?.id))
   }
 
-
-
   render() {
     const { productsAdded } = this.props;
-    const { selectedCurrencyIndex, totalCartQuantity, totalCartCost } = this.state;
+    const { selectedCurrencyIndex, totalQuantity, totalPrice } = productsAdded;
     const { isopen } = this.props;
-    console.log('prices', this)
+    // console.log('productsAdded:', productsAdded)
 
     return (
       <>
         <div className='mini-cart-container scroll absolute' ref={this.props.innerRef} style={isopen ? { display: 'block' } : { display: 'none' }}>
           <div className='mx-auto'>
-            <span className='minicart-categoty'><b>My Bag, </b>{totalCartQuantity} items</span>
+            <span className='minicart-categoty'><b>My Bag, </b>{totalQuantity} items</span>
             {
               this.props.productsAdded.products.map(item => {
                 const { id, brand, name, prices, gallery, quantity, selectedAttribute, attributes } = item;
@@ -54,9 +50,9 @@ class MiniCart extends Component {
                       <div className='minicart-title'>{brand}</div>
                       <div className='minicart-subtitle'>{name}</div>
                       {/* {Array.isArray(prices) && prices[selectedCurrencyIndex] && */}
-                        <div className='minicart-price'>
-                          {prices[0].currency.symbol}{prices[0].amount}
-                        </div>
+                      <div className='minicart-price'>
+                        {prices[0].currency.symbol}{prices[0].amount}
+                      </div>
                       {/* } */}
                       <div>
                         {Object.values(attributes).map(value => {
@@ -121,7 +117,7 @@ class MiniCart extends Component {
             }
             <div className='minicart-total'>
               <span><b>Total</b></span>
-              <span><b>{this.props.productsAdded.products[0]?.prices[selectedCurrencyIndex]?.currency.symbol}{totalCartCost}</b></span>
+              <span><b>{this.props.productsAdded.products[0]?.prices[selectedCurrencyIndex]?.currency.symbol}{totalPrice}</b></span>
             </div>
             <div className='minicart-checkout'>
               <Link to='/cart' className='viewbag'>VIEW BAG</Link>

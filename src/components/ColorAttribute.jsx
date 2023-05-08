@@ -24,7 +24,7 @@ class ColorAttribute extends Component {
               key={item.id}
               className='color-boxes'
               style={{
-                // border: Object.values(selectedAttribute).includes(item.value) ? '1px solid #5ECE7B' : '1px solid #D3D2D5',
+                border: Object.values(selectedAttribute).includes(item.value) ? '1px solid #5ECE7B' : '1px solid #D3D2D5',
                 background: `${item.value}`,
                 color: 'transparent'
               }}

@@ -18,7 +18,7 @@ class Cart extends Component {
     const totalCartQuantity = productsAdded.totalQuantity;
     const totalCartCost = productsAdded.totalPrice;
 
-    console.log('productsAdded', productsAdded)
+    // console.log('productsAdded', productsAdded)
 
     return (
       <>
@@ -27,7 +27,7 @@ class Cart extends Component {
           <hr className='divider'></hr>
           {
             productsAdded.products.map(item => {
-              console.log('item:', item)
+              // console.log('item:', item)
 
               return (
                 <>

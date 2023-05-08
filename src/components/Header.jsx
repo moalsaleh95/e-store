@@ -70,7 +70,7 @@ const Header = () => {
 
   const totalPrice = ProductsInCart.products.reduce((total, current) => {
     if (current && current.prices) {
-      console.log('current:', current)
+      // console.log('current:', current)
       return total + current.prices[selectedCurrencyIndex].amount * current.quantity
     } else {
       return total;
