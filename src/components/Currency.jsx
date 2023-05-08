@@ -15,7 +15,8 @@ class Currency extends React.Component {
   };
 
   render() {
-    const { isopen, currencies } = this.props;
+    const { isopen, currencies, ref } = this.props;
+    console.log('ref:',this.props.ref)
 
     return (
       <div className='currency-container' ref={this.props.ref} style={isopen ? { display: 'block' } : { display: 'none' }}>

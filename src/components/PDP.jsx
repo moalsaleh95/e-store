@@ -121,13 +121,14 @@ class PDP extends Component {
                       {/* For Colors attribute */ }
                       if (value.name === 'Color') {
                         return (
-                          <ColorAttribute selectedAttribute={this.state.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
+                          // {using the: new Date.now().toJSON() --> to generate time and use it for keys}
+                          <ColorAttribute key={() => new Date.now().toJSON()} selectedAttribute={this.state.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
                         )
                       }
                       else {
                         {/* For Other attribute */ }
                         return (
-                          <OtherAttributes selectedAttribute={this.state.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
+                          <OtherAttributes key={() => new Date.now().toJSON()} selectedAttribute={this.state.selectedAttribute} updateSetSelectedAttribute={this.updateSetSelectedAttribute} value={value} />
                         )
                       }
                     })}

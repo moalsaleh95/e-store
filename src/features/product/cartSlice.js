@@ -8,7 +8,6 @@ export const fetchCurrencies = createAsyncThunk('cart/fetchCurrencies', async ()
     return response;
 })
 
-
 export const cartSlice = createSlice({
     name: 'productsAdded',
     initialState: {

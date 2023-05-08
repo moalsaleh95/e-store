@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Link, useParams, useLocation } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { GET_CATEGORIES } from '../queries/queries';
+import { Link } from 'react-router-dom';
 import { capFirstLetterFunc } from '../hooks/capFirstLetter';
 import { fetchProducts } from '../features/product/plpSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import withRouter from './withRouter';
 import { connect } from 'react-redux';
+// import { useQuery } from '@apollo/client';
+// import { GET_CATEGORIES } from '../queries/queries';
 
 
 class PLP extends Component {
@@ -51,7 +50,7 @@ class PLP extends Component {
                             const { id, name, gallery, prices, inStock } = product;
                             return (
                                 <>
-                                    <Link to={`/pdp/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                                    <Link key={() => new Date.now().toJSON()} to={`/pdp/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                                         <div className={`${!inStock ? 'outOfStockContainer' : ''}`}>
                                             <span className='outOfStockLayer' style={!inStock ? { visibility: 'visible' } : { visibility: 'hidden' }}>OUT OF STOCK</span>
                                             <div key={id} className='plp-card relative'>
