@@ -63,11 +63,6 @@ class Header extends React.Component {
     document.addEventListener('mousedown', this.handleClickOutside)
   }
 
-  // Not needed since Header is on all the pages and doesn't unmount:
-  // componentWillUnmount() {
-  //     document.removeEventListener('mousedown', this.handleClickOutside);
-  // }
-
   componentDidUpdate(prevProps) {
     const { isopenCart } = this.state;
 
@@ -79,8 +74,6 @@ class Header extends React.Component {
   render() {
     const CurrencywithHOC = withForwardingRef(Currency)
     const MiniCartywithHOC = withForwardingRef(MiniCart)
-    // const CurrencywithHOC = withForwardRef(Currency)
-    // const MiniCartywithHOC = withForwardRef(MiniCart)
 
     const { isopenCurrency, isopenCart } = this.state;
     const { totalCartQuantity, ProductsInCart, allFetchedProductsData, selectedCurrencyIndex } = this.props;
@@ -92,6 +85,7 @@ class Header extends React.Component {
         return total;
       }
     }, 0)
+    
     this.props.dispatch(totalQuantity(totalQuant))
 
     const totalPrice = ProductsInCart.products.reduce((total, current) => {
@@ -110,7 +104,7 @@ class Header extends React.Component {
         <header className="container header_container flex justify-content-between header mx-auto">
 
           <div className="flex relative grid_left" >
-            <NavLink exact to="/all" className={` header-item flex justify-content-around px-16 relative`}>
+            <NavLink to="/all" className={` header-item flex justify-content-around px-16 relative`}>
               ALL
             </NavLink>
 

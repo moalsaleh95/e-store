@@ -55,14 +55,14 @@ class MiniCart extends Component {
                       </div>
                       {/* } */}
                       <div>
-                        {Object.values(attributes).map(value => {
+                        {Object.values(attributes).map((value, index) => {
 
                           {/* For Colors attribute */ }
                           if (value.name === 'Color') {
 
                             return (
-                              <>
-                                <p className='minicart-size-color-price' key={() => new Date.now().toJSON()}>{capAllLettersFunc(value.name)}:</p>
+                              <div key={index}>
+                                <p className='minicart-size-color-price'>{capAllLettersFunc(value.name)}:</p>
                                 <div className='flex mt-20'>
                                   {value.items.map(item => {
                                     return (
@@ -75,14 +75,14 @@ class MiniCart extends Component {
                                   })
                                   }
                                 </div>
-                              </>
+                              </div>
                             )
                           }
                           else {
                             {/* For Other attributes */ }
                             return (
-                              <>
-                                <p className='minicart-size-color-price' key={() => new Date.now().toJSON()}>{capAllLettersFunc(value.name)}:</p>
+                              <div key={index}>
+                                <p className='minicart-size-color-price'>{capAllLettersFunc(value.name)}:</p>
                                 <div className='flex mt-20'>
                                   {value.items.map(item => {
                                     return (
@@ -95,7 +95,7 @@ class MiniCart extends Component {
                                   })
                                   }
                                 </div>
-                              </>
+                              </div>
                             )
                           }
                         })}

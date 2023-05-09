@@ -9,11 +9,11 @@ import { Provider } from 'react-redux';
 class Index extends React.Component {
   render() {
     return (
-      <React.StrictMode>
+      // <React.StrictMode>
         <Provider store={store}>
           <App />
         </Provider>
-      </React.StrictMode>
+      // </React.StrictMode>
     );
   }
 }
