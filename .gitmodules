@@ -1,0 +1,3 @@
+[submodule "server/junior-react-endpoint"]
+	path = server/junior-react-endpoint
+	url = https://github.com/moalsaleh95/e-store.git
