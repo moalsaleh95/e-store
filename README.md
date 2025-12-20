@@ -1,15 +1,19 @@
-# `npm install`
-Installs all the dependencies
+## To run the website and server locally
+### `npm install`
+Install all the dependencies from the main directory
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-# `cd server`
 Open a terminal and navigate to the server directory:
+### `cd server`
 ### `npm install`
 Start the Apollo server
+### `npm run build`
 ### `npm start`
+Runs the server in the development mode.\
+Open [http://localhost:4000](http://localhost:4000) to view it in your browser.
 -------------------
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
