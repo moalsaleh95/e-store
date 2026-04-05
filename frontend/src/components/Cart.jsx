@@ -52,8 +52,8 @@ const Cart = () => {
         <div className='cart-quantity cart-bottom'>Quantity: <b>{totalCartQuantity}</b></div>
         <div className='cart-total cart-bottom'>Total: <b>{ProductsInCart.products[0]?.prices[selectedCurrencyIndex].currency.symbol}{totalCartCost}</b></div>
 
-        {/* <div><a href='#' className='cart-order'>ORDER</a></div> */}
-        <button><a href='#' className='cart-order'>ORDER</a></button>
+        <div><a href='#' className='cart-order'>ORDER</a></div> 
+        {/* <button><a href='#' className='cart-order'>ORDER</a></button> */}
       </div>
     </>
 
